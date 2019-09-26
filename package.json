@@ -1,0 +1,22 @@
+{
+  "name": "tennis",
+  "version": "1.0.0",
+  "description": "# Steps made # `python manage.py createmigrations app` `python manage.py migrate` `python manage.py createsuperuser`",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://AlexKotl@github.com/AlexKotl/tennis-friends.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexKotl/tennis-friends/issues"
+  },
+  "homepage": "https://github.com/AlexKotl/tennis-friends#readme",
+  "dependencies": {
+    "bootstrap": "^4.3.1"
+  }
+}
