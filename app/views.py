@@ -15,3 +15,9 @@ def courts_list(request):
     return render(request, 'courts.html', {
         'courts': Court.objects.filter(flag=1).order_by('-pk'),
     })
+
+def login(request):
+    return render(request, 'login.html')
+
+def register(request):
+    pass

@@ -13,9 +13,13 @@
     }
 
     .title {
-        font-size: 20px;
-        color: #33b196;
-        font-weight: bold;
+        a {
+            font-size: 20px;
+            color: #33b196;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
         img {
             width: 48px;
             height: 48px;
@@ -28,4 +32,9 @@
             font-size: 15px;
         }
     }
+}
+
+.login-form {
+    max-width: 300px;
+    margin: 100px auto;
 }
