@@ -14,8 +14,19 @@
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </head>
 <body>
-    <div class="row">
-        Tennis Friends
+    <div class="top-menu">
+        <div class="top-menu-container clearfix">
+            <div class="title float-left">
+                <img src="{% static 'images/logo.png' %}" alt="">
+                Tennis Mates
+            </div>
+            <div class="menu float-right">
+                <a href="{% url 'players' %}" class="btn btn-link">Игроки</a>
+                <a href="{% url 'courts' %}" class="btn btn-link">Корты</a>
+                <a href="{% url 'login' %}" class="btn btn-outline-primary">Войти</a>
+                <a href="{% url 'login' %}" class="btn btn-primary">Регистрация</a>
+            </div>
+        </div>
     </div>
     <div class="main-container">
         {% block content %}

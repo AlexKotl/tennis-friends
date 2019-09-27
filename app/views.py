@@ -8,7 +8,7 @@ def index(request):
 
 def players_list(request):
     return render(request, 'players.html', {
-        'players': Player.get_all(request),
+        'players': Player.objects.filter(flag=1).order_by('-pk'),
     })
 
 def courts_list(request):
