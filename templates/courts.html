@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Корты</h1>
+    {% for court in courts %}
+        {{ court }} <br>
+    {% endfor %}
+{% endblock %}

@@ -3,7 +3,7 @@ var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 
 var input = ['css/**/*.scss'];
-var output = 'static/css';
+var output = 'static';
 
 function css() {
     gulp.watch(input, function(cb) {
