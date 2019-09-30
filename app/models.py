@@ -20,6 +20,8 @@ class Player(models.Model):
     phone = models.CharField(max_length=255)
     courts = models.ManyToManyField(Court)
     is_looking = models.IntegerField(default=0)
+    rank = models.FloatField(default=0)
+    player_since = models.IntegerField(default=0)
     flag = models.IntegerField(default=1)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
