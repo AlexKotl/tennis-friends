@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
 from .models import Player, Court
+from .forms import RegisterForm
 
 def index(request):
     return render(request, 'index.html', {
@@ -20,4 +22,13 @@ def login(request):
     return render(request, 'login.html')
 
 def register(request):
-    pass
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            return HttpResponseRedirect('/')
+    else:
+        form = RegisterForm()
+
+    return render(request, 'register.html', {
+        'form': form
+    })
