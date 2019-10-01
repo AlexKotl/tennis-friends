@@ -25,8 +25,13 @@
             <div class="menu float-right">
                 <a href="{% url 'players' %}" class="btn btn-link">Игроки</a>
                 <a href="{% url 'courts' %}" class="btn btn-link">Корты</a>
-                <a href="{% url 'login' %}" class="btn btn-outline-primary">Войти</a>
-                <a href="{% url 'register' %}" class="btn btn-primary">Регистрация</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="btn btn-outline-primary">Выйти</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-outline-primary">Войти</a>
+                    <a href="{% url 'register' %}" class="btn btn-primary">Регистрация</a>
+                {% endif %}
+
             </div>
         </div>
     </div>
