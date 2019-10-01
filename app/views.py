@@ -32,3 +32,6 @@ def register(request):
     return render(request, 'register.html', {
         'form': form
     })
+
+def profile(request):
+    return render(request, 'profile.html')
