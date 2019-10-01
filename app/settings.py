@@ -126,3 +126,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ( os.path.join('static'), )
+
+AUTH_USER_MODEL = 'app.Player'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'profile'
+LOGOUT_REDIRECT_URL = 'index'
