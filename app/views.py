@@ -1,12 +1,13 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
+from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Player, Court
 from .forms import RegisterForm
 
-def index(request):
-    return render(request, 'index.html', {
-        # 'bases': Base.get_all(request),
-    })
+class IndexView(View):
+    def get(self, request):
+        return render(request, 'index.html', {})
 
 def players_list(request):
     return render(request, 'players.html', {
@@ -33,5 +34,6 @@ def register(request):
         'form': form
     })
 
-def profile(request):
-    return render(request, 'profile.html')
+class ProfileView(LoginRequiredMixin, View):
+    def get(self, request):
+        return render(request, 'profile.html', {})
