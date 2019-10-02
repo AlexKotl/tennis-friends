@@ -4,7 +4,7 @@
 
 {% block content %}
     <h1>Регистрация</h1>
-    <form action="{% url 'register' %}" method="post">
+    <form method="post">
         {% csrf_token %}
         {% bootstrap_form form layout="horizontal" %}
         <input type="submit" value="Регистрация" class="btn btn-primary">
