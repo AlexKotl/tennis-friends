@@ -26,6 +26,7 @@
                 <a href="{% url 'players' %}" class="btn btn-link">Игроки</a>
                 <a href="{% url 'courts' %}" class="btn btn-link">Корты</a>
                 {% if user.is_authenticated %}
+                    Привет, {{ user.first_name }}
                     <a href="{% url 'logout' %}" class="btn btn-outline-primary">Выйти</a>
                 {% else %}
                     <a href="{% url 'login' %}" class="btn btn-outline-primary">Войти</a>

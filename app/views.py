@@ -11,7 +11,7 @@ class IndexView(View):
 
 def players_list(request):
     return render(request, 'players.html', {
-        'players': Player.objects.filter(flag=1).order_by('-pk'),
+        'players': Player.objects.filter(is_active=1).order_by('-pk'),
     })
 
 def courts_list(request):
