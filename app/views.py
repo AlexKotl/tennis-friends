@@ -23,6 +23,12 @@ def courts_list(request):
 def login(request):
     return render(request, 'login.html')
 
+class PlayerView(View):
+    def get(self, request, id):
+        return render(request, 'player.html', {
+            'player': Player.objects.get(pk=id)
+        })
+
 class RegisterView(generic.CreateView):
     form_class = PlayerCreationForm
     success_url = reverse_lazy('login')
