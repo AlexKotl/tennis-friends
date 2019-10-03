@@ -27,9 +27,14 @@
     }
 
     .menu {
-        a {
+        a.btn {
             margin: 4px 3px;
-            font-size: 15px;
+            font-size: 16px;
+        }
+
+        .profile-actions {
+            font-size: 14px;
+            margin-left: 20px;
         }
     }
 }
