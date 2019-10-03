@@ -4,7 +4,7 @@ from django.views import View, generic
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Player, Court
-from .forms import PlayerCreationForm
+from .forms import PlayerCreationForm, PlayerChangeForm
 
 class IndexView(View):
     def get(self, request):
@@ -28,19 +28,12 @@ class RegisterView(generic.CreateView):
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
 
+class ProfileView(LoginRequiredMixin, generic.UpdateView):
+    model = Player
+    form_class = PlayerChangeForm
+    template_name = 'profile.html'
+    success_url = reverse_lazy('profile')
+    #fields = ['first_name', 'last_name']
 
-# def register(request):
-#     if request.method == 'POST':
-#         form = RegisterForm(request.POST)
-#         if form.is_valid():
-#             return HttpResponseRedirect('/')
-#     else:
-#         form = RegisterForm()
-
-#     return render(request, 'register.html', {
-#         'form': form
-#     })
-
-class ProfileView(LoginRequiredMixin, View):
-    def get(self, request):
-        return render(request, 'profile.html', {})
+    def get_object(self, queryset=None):
+        return Player.objects.get(pk=self.request.user.id)
