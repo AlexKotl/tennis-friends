@@ -9,7 +9,7 @@ from .forms import PlayerCreationForm, PlayerChangeForm
 
 class IndexView(View):
     def get(self, request):
-        return render(request, 'index.html', {})
+        return render(request, 'homepage.html', {})
 
 def players_list(request):
     return render(request, 'players.html', {
