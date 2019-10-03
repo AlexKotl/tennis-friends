@@ -4,5 +4,23 @@
 {% block content %}
     <h1>{{ player.first_name }}</h1>
 
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            Уровень: <b>{{ player.rank }}</b><br>
+            Игровой опыт: <b>{{ player.player_since }}</b>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <h3>Корты</h3>
+            {% if player.courts.all.count > 0 %}
+                {% for court in player.courts.all %}
+                    <li>{{ court.name }}</li>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-primary">
+                    Этот игрок не выбрал корты, на которых играет.
+                </div>
+            {% endif %}
+        </div>
+    </div>
 
 {% endblock %}
