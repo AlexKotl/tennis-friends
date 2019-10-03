@@ -27,7 +27,7 @@ class PlayerCreationForm(UserCreationForm):
 
     class Meta:
         model = Player
-        fields = ('username', 'email', 'first_name', 'phone', 'courts', 'rank', 'player_since')
+        fields = ( 'email', 'first_name', 'phone', 'courts', 'rank', 'player_since')
 
     def clean_username(self):
         print("cleaning username ")
