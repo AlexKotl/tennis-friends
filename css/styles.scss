@@ -2,6 +2,7 @@
     max-width: 1000px;
     margin: auto;
     padding: 15px;
+    padding-bottom: 200px;
 }
 
 .top-menu {
@@ -52,4 +53,11 @@
 
 .modal-body {
     font-size: 13px;
+}
+
+.site-footer {
+    box-shadow: 0px -1px 2px lightgray;
+    color: #414141;
+    line-height: 70px;
+    font-size: 12px;
 }
