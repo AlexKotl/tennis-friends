@@ -18,13 +18,16 @@ class Court(models.Model):
 class Player(AbstractUser):
     # first_name = models.CharField(max_length=100)
     # last_name = models.CharField(max_length=100)
-    # email = models.CharField(max_length=255)
-    phone = models.CharField(max_length=255)
+    username = models.CharField(max_length=180, unique=False)
+    email = models.CharField(max_length=180, unique=True)
+    phone = models.CharField(max_length=180)
     courts = models.ManyToManyField(Court)
     is_looking = models.IntegerField(default=0)
     rank = models.FloatField(default=0)
     player_since = models.IntegerField(default=0)
-    # user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.email})"

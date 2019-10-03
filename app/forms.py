@@ -16,19 +16,30 @@ class PlayerCreationForm(UserCreationForm):
         label="Корты",
         help_text="Корты на которых вы играете"
     )
-    rank = forms.ChoiceField(
-        label="Уровень игры",
-        choices=[(x/10, x/10) for x in range(10, 75, 5)],
-        help_text="<a href='#' data-toggle='modal' data-target='#rankModal'>Как определить свой уровень?</a>",
-    )
-    player_since = forms.ChoiceField(
-        label='Игровой опыт',
-        choices=[(0, '-')] + [(x, f'с {x} года') for x in range(datetime.today().year, datetime.today().year - 10, -1)],
-    )
+    # rank = forms.ChoiceField(
+    #     label="Уровень игры",
+    #     choices=[(x/10, x/10) for x in range(10, 75, 5)],
+    #     help_text="<a href='#' data-toggle='modal' data-target='#rankModal'>Как определить свой уровень?</a>",
+    # )
+    # player_since = forms.ChoiceField(
+    #     label='Игровой опыт',
+    #     choices=[(0, '-')] + [(x, f'с {x} года') for x in range(datetime.today().year, datetime.today().year - 10, -1)],
+    # )
 
     class Meta:
         model = Player
-        fields = ("first_name", 'email')
+        fields = ('username', 'email', 'first_name',)
+
+    def clean_username(self):
+        print("cleaning username ")
+        return self.data.get('email')
+
+    # def clean(self):
+    #     super().clean()
+    #     self.cleaned_data['username'] = self.cleaned_data.get('email')
+    #     print("Cleaned username: " + self.cleaned_data['username'])
+    #     print(self.cleaned_data)
+    #     return self.cleaned_data
 
 class PlayerChangeForm(UserChangeForm):
     class Meta:
