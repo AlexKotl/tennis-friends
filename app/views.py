@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.views import View, generic
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Count
 from .models import Player, Court
 from .forms import PlayerCreationForm, PlayerChangeForm
 
@@ -12,7 +13,7 @@ class IndexView(View):
 
 def players_list(request):
     return render(request, 'players.html', {
-        'players': Player.objects.filter(is_active=1).order_by('-pk'),
+        'players': Player.objects.filter(is_active=1).annotate(courts_count=Count('courts')).order_by('-pk'),
     })
 
 def courts_list(request):
