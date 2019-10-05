@@ -13,11 +13,15 @@
         <div class="col-xs-12 col-md-7">
             Уровень: <b>{{ player.rank }}</b><br>
             Игровой опыт: <b>{{ player.player_since }}</b>
-
-            <h3>Корты</h3>
+            {% if player.about != '' %}
+                <br><br><b>О себе:</b><br>
+                {{ player.about }}
+            {% endif %}
+            <br><br>
+            <h3>Играет на кортах:</h3>
             {% if player.courts.all.count > 0 %}
                 {% for court in player.courts.all %}
-                    <li>{{ court.name }}</li>
+                    <li><a href="{% url 'court' court.id %}">{{ court.name }}</a></li>
                 {% endfor %}
             {% else %}
                 <div class="alert alert-primary">

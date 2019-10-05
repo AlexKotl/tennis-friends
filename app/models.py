@@ -26,6 +26,7 @@ class Player(AbstractUser):
     is_looking = models.IntegerField(default=0)
     rank = models.FloatField(default=0)
     player_since = models.IntegerField(default=0)
+    about = models.TextField(default="")
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
