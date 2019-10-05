@@ -32,3 +32,13 @@ class Player(AbstractUser):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.email})"
+
+class Message(models.Model):
+    author = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="authors")
+    recipient = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="recipients")
+    text = models.TextField()
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.text}"
