@@ -28,33 +28,39 @@
         </div>
         <div class="col-xs-12 col-md-5">
             <h3>Связаться с игроком</h3>
-            <form action="{% url 'message_player' player.id %}" method="POST" class="message-form">
-                {% csrf_token %}
-                <div class="form-group">
-                    <textarea name="text" cols="40" rows="3" class="form-control" placeholder="Введите ваше сообщение..." title="" required=""></textarea>
-                </div>
-                <input type="submit" value="Отправить" class="btn btn-primary">
-            </form>
-
-            <div class="messages-list">
-                {% for message in messages %}
-                    {% if message.author.id == request.user.id %}
-                        <div class="message self">
-                    {% else %}
-                        <div class="message">
-                    {% endif %}
-                        <div class="text">
-                            {{ message.text }}
-                        </div>
-                        <div class="author">
-                            {{ message.author.first_name }}
-                        </div>
-                        <div class="date">
-                            {{ message.date_created }}
-                        </div>
+            {% if user.is_authenticated %}
+                <form action="{% url 'message_player' player.id %}" method="POST" class="message-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <textarea name="text" cols="40" rows="3" class="form-control" placeholder="Введите ваше сообщение..." title="" required=""></textarea>
                     </div>
-                {% endfor %}
-            </div>
+                    <input type="submit" value="Отправить" class="btn btn-primary">
+                </form>
+
+                <div class="messages-list">
+                    {% for message in messages %}
+                        {% if message.author.id == request.user.id %}
+                            <div class="message self">
+                        {% else %}
+                            <div class="message">
+                        {% endif %}
+                            <div class="text">
+                                {{ message.text }}
+                            </div>
+                            <div class="author">
+                                {{ message.author.first_name }}
+                            </div>
+                            <div class="date">
+                                {{ message.date_created }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-warning">
+                    <a href="{% url 'login' %}">Войдите</a>, чтобы отправить игроку сообщение.
+                </div>
+            {% endif %}
         </div>
     </div>
 

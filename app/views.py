@@ -28,7 +28,7 @@ class PlayerView(View):
     def get(self, request, id):
         player = Player.objects.get(pk=id)
         messages = None
-        if request.user is not None:
+        if request.user.is_authenticated:
             user = Player.objects.get(pk=request.user.id)
             messages = Message.objects.filter(author__in=[user, player], recipient__in=[user, player]).order_by("-pk")
 
@@ -38,7 +38,7 @@ class PlayerView(View):
             'message_form': MessageForm
         })
 
-class MessageView(View):
+class MessageView(LoginRequiredMixin, View):
     def post(self, request, id):
         try:
             author = Player.objects.get(pk=request.user.id)
