@@ -33,7 +33,7 @@ class PlayerView(View):
 class CourtView(View):
     def get(self, request, id):
         return render(request, 'court.html', {
-            'player': Court.objects.get(pk=id)
+            'court': Court.objects.get(pk=id)
         })
 
 class RegisterView(generic.CreateView):
