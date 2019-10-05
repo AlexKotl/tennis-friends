@@ -20,6 +20,7 @@ player_since_input = forms.ChoiceField(
     label='Игровой опыт',
     choices=[(0, '-')] + [(x, f'с {x} года') for x in range(datetime.today().year, datetime.today().year - 10, -1)],
 )
+about_input = forms.CharField(label='О себе', widget=forms.Textarea(attrs={'rows': 4, 'cols': 10}), help_text="Расскажите о себе, ваш опыт игры, увлечения и т.д.", required=False)
 
 class PlayerCreationForm(UserCreationForm):
     first_name = forms.CharField(label='Имя', max_length=100, help_text="Ваше полное имя")
@@ -28,10 +29,11 @@ class PlayerCreationForm(UserCreationForm):
     courts = courts_input
     rank = rank_input
     player_since = player_since_input
+    about = about_input
 
     class Meta:
         model = Player
-        fields = ( 'email', 'first_name', 'phone', 'courts', 'rank', 'player_since')
+        fields = ( 'email', 'first_name', 'phone', 'courts', 'rank', 'player_since', 'about')
 
     # def clean_username(self):
     #     print("cleaning username ")
@@ -41,9 +43,10 @@ class PlayerChangeForm(UserChangeForm):
     courts = courts_input
     rank = rank_input
     player_since = player_since_input
+    about = about_input
     class Meta:
         model = Player
-        fields = ('first_name', 'phone', 'courts', 'rank', 'player_since')
+        fields = ('first_name', 'phone', 'courts', 'rank', 'player_since', 'about')
 
 class MessageForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea, required=True)
