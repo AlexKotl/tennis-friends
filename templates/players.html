@@ -12,10 +12,10 @@
                         <h5 class="card-title">{{ player.first_name }}</h5>
                         <p class="card-text">
                             {% if player.rank > 0 %}
-                                Уровень: {{ player.rank }} <br>
+                                Уровень: <strong>{{ player.rank }}</strong> <br>
                             {% endif %}
                             {% if player.rank > 0 %}
-                                Корты: {{ player.courts_count }}
+                                Корты: <strong>{{ player.courts_count }}</strong>
                             {% endif %}
                         </p>
                         <a href="{% url 'player' player.id %}" class="btn btn-info btn-sm">
