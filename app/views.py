@@ -18,7 +18,7 @@ def players_list(request):
 
 def courts_list(request):
     return render(request, 'courts.html', {
-        'courts': Court.objects.filter(flag=1).order_by('-pk'),
+        'courts': Court.objects.filter(flag=1).annotate(players_count=Count('player')).order_by('-pk'),
     })
 
 def login(request):
@@ -28,6 +28,12 @@ class PlayerView(View):
     def get(self, request, id):
         return render(request, 'player.html', {
             'player': Player.objects.get(pk=id)
+        })
+
+class CourtView(View):
+    def get(self, request, id):
+        return render(request, 'court.html', {
+            'player': Court.objects.get(pk=id)
         })
 
 class RegisterView(generic.CreateView):
