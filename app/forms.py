@@ -44,3 +44,6 @@ class PlayerChangeForm(UserChangeForm):
     class Meta:
         model = Player
         fields = ('first_name', 'phone', 'courts', 'rank', 'player_since')
+
+class MessageForm(forms.Form):
+    message = forms.CharField(widget=forms.Textarea)

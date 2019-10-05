@@ -1,11 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.views import View, generic
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
 from .models import Player, Court
-from .forms import PlayerCreationForm, PlayerChangeForm
+from .forms import PlayerCreationForm, PlayerChangeForm, MessageForm
 
 class IndexView(View):
     def get(self, request):
@@ -27,8 +27,13 @@ def login(request):
 class PlayerView(View):
     def get(self, request, id):
         return render(request, 'player.html', {
-            'player': Player.objects.get(pk=id)
+            'player': Player.objects.get(pk=id),
+            'message_form': MessageForm
         })
+
+class MessageView(View):
+    def post(self, request, id):
+        return HttpResponseRedirect(reverse('player', args=(id,)))
 
 class CourtView(View):
     def get(self, request, id):
