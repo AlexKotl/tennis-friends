@@ -14,16 +14,6 @@
             Уровень: <b>{{ player.rank }}</b><br>
             Игровой опыт: <b>{{ player.player_since }}</b>
 
-            <h3>Связаться с игроком</h3>
-            <form action="{% url 'message_player' player.id %}" method="POST">
-                {% csrf_token %}
-                <div class="form-group">
-                    <textarea name="text" cols="40" rows="10" class="form-control" placeholder="Message" title="" required="" id="id_message"></textarea>
-                </div>
-                <input type="submit" value="Отправить" class="btn btn-primary">
-            </form>
-        </div>
-        <div class="col-xs-12 col-md-5">
             <h3>Корты</h3>
             {% if player.courts.all.count > 0 %}
                 {% for court in player.courts.all %}
@@ -34,6 +24,21 @@
                     Этот игрок не выбрал корты, на которых играет.
                 </div>
             {% endif %}
+
+        </div>
+        <div class="col-xs-12 col-md-5">
+            <h3>Связаться с игроком</h3>
+            <form action="{% url 'message_player' player.id %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea name="text" cols="40" rows="10" class="form-control" placeholder="Message" title="" required="" id="id_message"></textarea>
+                </div>
+                <input type="submit" value="Отправить" class="btn btn-primary">
+            </form>
+
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
         </div>
     </div>
 

@@ -26,8 +26,15 @@ def login(request):
 
 class PlayerView(View):
     def get(self, request, id):
+        player = Player.objects.get(pk=id)
+        messages = None
+        if request.user is not None:
+            user = Player.objects.get(pk=request.user.id)
+            messages = Message.objects.filter(author__in=[user, player], recipient__in=[user, player]).order_by("-pk")
+
         return render(request, 'player.html', {
-            'player': Player.objects.get(pk=id),
+            'player': player,
+            'messages': messages,
             'message_form': MessageForm
         })
 
