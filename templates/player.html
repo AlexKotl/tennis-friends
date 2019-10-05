@@ -28,17 +28,33 @@
         </div>
         <div class="col-xs-12 col-md-5">
             <h3>Связаться с игроком</h3>
-            <form action="{% url 'message_player' player.id %}" method="POST">
+            <form action="{% url 'message_player' player.id %}" method="POST" class="message-form">
                 {% csrf_token %}
                 <div class="form-group">
-                    <textarea name="text" cols="40" rows="10" class="form-control" placeholder="Message" title="" required="" id="id_message"></textarea>
+                    <textarea name="text" cols="40" rows="3" class="form-control" placeholder="Введите ваше сообщение..." title="" required=""></textarea>
                 </div>
                 <input type="submit" value="Отправить" class="btn btn-primary">
             </form>
 
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
+            <div class="messages-list">
+                {% for message in messages %}
+                    {% if message.author.id == request.user.id %}
+                        <div class="message self">
+                    {% else %}
+                        <div class="message">
+                    {% endif %}
+                        <div class="text">
+                            {{ message.text }}
+                        </div>
+                        <div class="author">
+                            {{ message.author.first_name }}
+                        </div>
+                        <div class="date">
+                            {{ message.date_created }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 
