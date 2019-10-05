@@ -1,5 +1,6 @@
 {% extends 'index.html' %}
 {% load static %}
+{% load pluralize %}
 
 {% block content %}
     <h1>Корты</h1>
@@ -16,7 +17,7 @@
                         </p>
                         <p class="card-text">
                             <i class="fa fa-users"></i>
-                            {{ court.players_count }} игроков
+                            {{ court.players_count }} {{ court.players_count | pluralize:"игрок,игрока,игроков" }}
                         </p>
                         <a href="{% url 'court' court.id %}" class="btn btn-primary btn-sm">
                             Подробнее
