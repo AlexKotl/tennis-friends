@@ -10,6 +10,6 @@ class PlayerAdmin(UserAdmin):
     model = Player
     list_display = ['email', 'username',]
 
-admin.site.register(Player, PlayerAdmin)
+admin.site.register(Player)
 admin.site.register(Court)
 admin.site.register(Message)
