@@ -12,3 +12,4 @@ class PlayerAdmin(UserAdmin):
 
 admin.site.register(Player, PlayerAdmin)
 admin.site.register(Court)
+admin.site.register(Message)

@@ -46,4 +46,4 @@ class PlayerChangeForm(UserChangeForm):
         fields = ('first_name', 'phone', 'courts', 'rank', 'player_since')
 
 class MessageForm(forms.Form):
-    message = forms.CharField(widget=forms.Textarea)
+    message = forms.CharField(widget=forms.Textarea, required=True)

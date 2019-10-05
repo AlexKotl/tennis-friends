@@ -4,7 +4,11 @@
 
 {% block content %}
     <h1>{{ player.first_name }}</h1>
-
+    {% if request.GET.r %}
+        <div class="alert alert-success">
+                Сообщение отправлено.
+        </div>
+    {% endif %}
     <div class="row">
         <div class="col-xs-12 col-md-7">
             Уровень: <b>{{ player.rank }}</b><br>
@@ -14,7 +18,7 @@
             <form action="{% url 'message_player' player.id %}" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
-                    <textarea name="message" cols="40" rows="10" class="form-control" placeholder="Message" title="" required="" id="id_message"></textarea>
+                    <textarea name="text" cols="40" rows="10" class="form-control" placeholder="Message" title="" required="" id="id_message"></textarea>
                 </div>
                 <input type="submit" value="Отправить" class="btn btn-primary">
             </form>

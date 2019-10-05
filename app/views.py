@@ -4,7 +4,7 @@ from django.views import View, generic
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
-from .models import Player, Court
+from .models import Player, Court, Message
 from .forms import PlayerCreationForm, PlayerChangeForm, MessageForm
 
 class IndexView(View):
@@ -33,7 +33,15 @@ class PlayerView(View):
 
 class MessageView(View):
     def post(self, request, id):
-        return HttpResponseRedirect(reverse('player', args=(id,)))
+        try:
+            author = Player.objects.get(pk=request.user.id)
+            recipient = Player.objects.get(pk=id)
+        except:
+            raise Exception("Cant find author or recipient user")
+        message = Message(author=author, recipient=recipient, text=request.POST.get('text', ''))
+        message.save()
+        result = 'sent'
+        return HttpResponseRedirect("{}?r={}".format(reverse('player', args=(id,)), result))
 
 class CourtView(View):
     def get(self, request, id):
