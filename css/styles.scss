@@ -7,6 +7,19 @@
     padding-bottom: 200px;
 }
 
+.background-image {
+    background-size: cover;
+    display: block;
+    padding-bottom: 70%;
+    &.square {
+        padding-bottom: 100%;
+    }
+    &.circle {
+        border-radius: 50%;
+        padding-bottom: 100%;
+    }
+}
+
 .top-menu {
     box-shadow: 0px 1px 2px lightgray;
     .top-menu-container {
@@ -57,7 +70,7 @@
 
     .message {
         margin-bottom: 15px;
-        
+
     }
     .text {
         //box-shadow: 0px 1px 2px lightgray;
@@ -88,6 +101,21 @@
         }
         .date {
             text-align: right;
+        }
+    }
+}
+
+.home-page {
+    .top-players {
+        .player {
+            font-size: 11px;
+            color: #333;
+            text-align: center;
+            margin: 10px 0;
+
+            .title {
+                font-size: 13px;
+            }
         }
     }
 }

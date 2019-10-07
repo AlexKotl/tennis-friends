@@ -2,13 +2,32 @@
 {% load static %}
 
 {% block content %}
-    <div class="row">
+    <div class="row home-page">
         <div class="col-md-8">
-            <h2>Добро пожаловать на сервис поиска партнеров по теннису!</h2>
+            <h2>Поиска партнеров по теннису</h2>
             <p>Ищите с кем поиграть в Киеве? Наш сервис поможет найти партнера по теннису на вашем любимом корте.</p>
-            <p>В разделе кортов можно выбрать интересующий корт и найти игроков, которые на нем играют. </p>
-            <p>Также можете перейти в раздел игроков и найти партнера по уровню игры.</p>
-            
+            <div class="row">
+                <div class="col-sm-3 col-xs-6">
+                    <a href="{% url 'courts' %}">
+                        <div class="background-image circle" style="background-image: url('{% static 'images/blank-court.jpg' %}')"></div>
+                    </a>
+                </div>
+                <div class="col-sm-9 justify-content-center align-self-center">
+                    В разделе кортов можно найти интересующий корт и просмотреть игроков, которые на нем играют.
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-9 justify-content-center align-self-center">
+                    Также можете перейти в раздел игроков и найти партнера по уровню игры.
+                </div>
+                <div class="col-sm-3">
+                    <a href="{% url 'players' %}">
+                        <div class="background-image circle" style="background-image: url('{% static 'images/player-girl.jpg' %}')"></div>
+                    </a>
+                </div>
+            </div>
+            <p></p>
+
             {% if not user.is_authenticated %}
                 <br/><br/>
                 <div class="text-center">
@@ -21,15 +40,23 @@
         </div>
         <div class="col-md-4">
             <h4>Игроки, которые ищут патнеров:</h4>
-            {% for player in players %}
-                {{player}}
-            {% endfor %}
-            <h4>Корты:</h4>
-            {% for court in courts %}
-                {{court}}
-            {% endfor %}
+            <div class="top-players row">
+                {% for player in players %}
+                    <a href="{% url 'player' player.id %}" class="col-sm-4">
+                        <div class="player ">
+                            <div class="background-image circle square" style="background-image: url('{% firstof player.image '/static/images/blank-player2.jpg' %}')"></div>
+                            <div class="title">
+                                {{ player.first_name }}
+                            </div>
+                            <div class="description">
+                                Уровень: <b>{% firstof player.rank '-' %}</b>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
         </div>
     </div>
-    
-    
+
+
 {% endblock %}
