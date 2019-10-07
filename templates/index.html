@@ -8,7 +8,7 @@
     <meta name="Language" content="ru"/>
     <meta name="country" content="UA"/>
 
-    
+
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'styles.css' %}">
@@ -22,13 +22,19 @@
         <div class="top-menu-container clearfix">
             <div class="title float-left">
                 <a href="/">
-                    <img src="{% static 'images/logo.png' %}" alt="">
+                    <img src="{% static 'images/tennis-ball.png' %}" alt="">
                     Tennis Mates
                 </a>
             </div>
             <div class="menu float-right">
-                <a href="{% url 'players' %}" class="btn btn-link">Игроки</a>
-                <a href="{% url 'courts' %}" class="btn btn-link">Корты</a>
+                <a href="{% url 'players' %}" class="menu-item">
+                    <img src="{% static 'images/icons/racket-white.png' %}" class="icon" alt="">
+                    Игроки
+                </a>
+                <a href="{% url 'courts' %}" class="menu-item">
+                    <img src="{% static 'images/icons/court-white.png' %}" class="icon" alt="">
+                    Корты
+                </a>
                 {% if user.is_authenticated %}
                     <span class="profile-actions">
                         Привет, <a href='{% url 'profile' %}'>{{ user.first_name }}</a>

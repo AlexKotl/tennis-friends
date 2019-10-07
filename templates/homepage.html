@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="row home-page">
-        <div class="col-md-8">
+        <div class="col-md-7">
             <h2>Поиска партнеров по теннису</h2>
             <p>Ищите с кем поиграть в Киеве? Наш сервис поможет найти партнера по теннису на вашем любимом корте.</p>
             <div class="row">
@@ -38,23 +38,29 @@
                 </div>
             {% endif %}
         </div>
-        <div class="col-md-4">
-            <h4>Игроки, которые ищут патнеров:</h4>
-            <div class="top-players row">
-                {% for player in players %}
-                    <a href="{% url 'player' player.id %}" class="col-sm-4">
-                        <div class="player ">
-                            <div class="background-image circle square" style="background-image: url('{% firstof player.image '/static/images/blank-player2.jpg' %}')"></div>
-                            <div class="title">
-                                {{ player.first_name }}
-                            </div>
-                            <div class="description">
-                                Уровень: <b>{% firstof player.rank '-' %}</b>
-                            </div>
-                        </div>
-                    </a>
-                {% endfor %}
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Игроки, которые ищут патнеров:</h5>
+                    <div class="top-players row">
+                        {% for player in players %}
+                            <a href="{% url 'player' player.id %}" class="col-4">
+                                <div class="player ">
+                                    <div class="background-image circle square" style="background-image: url('{% firstof player.image '/static/images/blank-player2.jpg' %}')"></div>
+                                    <div class="title">
+                                        {{ player.first_name }}
+                                    </div>
+                                    <div class="description">
+                                        Уровень: <b>{% firstof player.rank '-' %}</b>
+                                    </div>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+
             </div>
+
         </div>
     </div>
 

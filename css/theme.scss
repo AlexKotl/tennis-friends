@@ -1,7 +1,31 @@
+$blue: #4080a8;
+
+h1, h2 {
+    font-size: 24px;
+}
+
 .btn-primary {
-    background-color: #4080a8; 
+    background-color: $blue;
     border-color: #367399;
+
+    &:hover {
+        background-color: #4f98c6;
+        border-color: #367399;
+    }
+}
+.btn-outline-primary {
+    border-color: $blue;
+    color: $blue;
+
+    &:hover {
+        background-color: $blue;
+        border-color: #367399;
+    }
 }
 a {
     color: #4080a8
+}
+
+.card-body {
+    padding: 15px;
 }
