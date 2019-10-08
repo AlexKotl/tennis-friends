@@ -4,6 +4,8 @@ from django.views import View, generic
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
+from django.core.mail import send_mail
+from django.conf import settings
 from .models import Player, Court, Message
 from .forms import PlayerCreationForm, PlayerChangeForm, MessageForm
 
@@ -48,8 +50,17 @@ class MessageView(LoginRequiredMixin, View):
             recipient = Player.objects.get(pk=id)
         except:
             raise Exception("Cant find author or recipient user")
+
         message = Message(author=author, recipient=recipient, text=request.POST.get('text', ''))
         message.save()
+
+        send_mail(subject="{} - новое сообщение".format(settings.SITE_NAME),
+            message="Вам пришло новое сообщение от {}: \n\n{}\n\n{}"
+                .format(author.first_name, request.POST.get('text', ''), settings.SITE_URL),
+            from_email=settings.SITE_EMAIL,
+            recipient_list=[recipient.email],
+            fail_silently=not settings.DEBUG)
+
         result = 'sent'
         return HttpResponseRedirect("{}?r={}".format(reverse('player', args=(id,)), result))
 
