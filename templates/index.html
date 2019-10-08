@@ -36,7 +36,6 @@
                     <img src="{% static 'images/icons/court-white.png' %}" class="icon" alt="">
                     Корты
                 </a>
-                <span class="delimiter">|</span>
                 {% if user.is_authenticated %}
                     <span class="profile-actions">
                         Привет, <a href='{% url 'profile' %}'>{{ user.first_name }}</a>

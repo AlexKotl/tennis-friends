@@ -81,6 +81,7 @@ body {
         .btn {
             padding: 5px 12px;
             font-size: 14px;
+            color: white;
 
             i {
                 margin-right: 5px;
@@ -134,6 +135,8 @@ body {
 
 .players-list {
     .player {
+        text-decoration: none;
+        color: #333;
         margin: 10px 0;
     }
 }

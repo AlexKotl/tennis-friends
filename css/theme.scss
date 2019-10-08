@@ -28,4 +28,10 @@ a {
 
 .card-body {
     padding: 15px;
+    font-size: 13px;
+
+    .card-title {
+        font-size: 15px;
+        margin: 7px 0;
+    }
 }
