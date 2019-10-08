@@ -8,20 +8,31 @@
 {% endblock %}
 
 {% block content %}
-    <h1>{{ player.first_name }}</h1>
     {% if request.GET.r %}
         <div class="alert alert-success">
-                Сообщение отправлено.
+            Сообщение отправлено.
         </div>
     {% endif %}
     <div class="row">
         <div class="col-xs-12 col-md-7">
-            Уровень: <b>{{ player.rank }}</b><br>
-            Игровой опыт: <b>{{ player.player_since }}</b>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="background-image circle" style="background-image: url('{% firstof player.image '/static/images/blank-player2.jpg' %}')"></div>
+                </div>
+                <div class="col-md-9">
+                    <h1>{{ player.first_name }}</h1>
+                    Уровень: <b>{{ player.rank }}</b><br>
+                    {% if player.player_since > 0 %}
+                        Игровой опыт: <b>с {{ player.player_since }}</b>
+                    {% endif %}
+                </div>
+            </div>
+
             {% if player.about != '' %}
                 <br><br><b>О себе:</b><br>
                 {{ player.about }}
             {% endif %}
+
             <br><br>
             <h3>Играет на кортах:</h3>
             {% if player.courts.all.count > 0 %}
