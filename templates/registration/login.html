@@ -5,16 +5,26 @@
         <p>Логин или пароль неправильные.</p>
     {% endif %}
 
-    <form action="{% url 'login' %}" class="login-form" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            <label>Email</label>
-            <input type="text" class="form-control" name="username" placeholder="">
+    <div class="row" style='padding-top: 100px;'>
+        <div class="col-sm-4"></div>
+        <div class="card col-sm-4">
+            <div class="card-body">
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" class="form-control" name="username" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label>Пароль</label>
+                        <input type="password" class="form-control" name="password" placeholder="">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Войти</button>
+                </form>
+            </div>
         </div>
-        <div class="form-group">
-            <label>Пароль</label>
-            <input type="password" class="form-control" name="password" placeholder="">
-        </div>
-        <button type="submit" class="btn btn-primary">Войти</button>
-    </form>
+        <div class="col-sm-4"></div>
+    </div>
+
+
 {% endblock %}
