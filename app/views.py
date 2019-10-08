@@ -16,18 +16,20 @@ class IndexView(View):
             'players': Player.objects.filter(is_active=1).annotate(courts_count=Count('courts')).order_by('-pk')[:6],
         })
 
-def players_list(request):
-    return render(request, 'players.html', {
-        'players': Player.objects.filter(is_active=1).annotate(courts_count=Count('courts')).order_by('-pk'),
-    })
+class PlayersView(View):
+    def get(self, request):
+        return render(request, 'players.html', {
+            'players': Player.objects.filter(is_active=1).annotate(courts_count=Count('courts')).order_by('-pk'),
+        })
 
-def courts_list(request):
-    return render(request, 'courts.html', {
-        'courts': Court.objects.filter(flag=1).annotate(players_count=Count('player')).order_by('-pk'),
-    })
+class CourtsView(View):
+    def get(self, request):
+        return render(request, 'courts.html', {
+            'courts': Court.objects.filter(flag=1).annotate(players_count=Count('player')).order_by('-pk'),
+        })
 
-def login(request):
-    return render(request, 'login.html')
+class LoginView(generic.CreateView):
+    template_name = 'login.html'
 
 class PlayerView(View):
     def get(self, request, id):
