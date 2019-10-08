@@ -32,18 +32,28 @@
                     <img src="{% static 'images/icons/racket-white.png' %}" class="icon" alt="">
                     Игроки
                 </a>
-                <a href="{% url 'courts' %}" class="menu-item">
+                <a href="{% url 'courts' %}" class="menu-item" style="margin-right: 30px">
                     <img src="{% static 'images/icons/court-white.png' %}" class="icon" alt="">
                     Корты
                 </a>
+                <span class="delimiter">|</span>
                 {% if user.is_authenticated %}
                     <span class="profile-actions">
                         Привет, <a href='{% url 'profile' %}'>{{ user.first_name }}</a>
                     </span>
-                    <a href="{% url 'logout' %}" class="btn btn-outline-primary">Выйти</a>
+                    <a href="{% url 'logout' %}" class="btn btn-outline-primary" style="margin-left: 10px">
+                        <i class="fa fa-sign-out"></i>
+                        Выйти
+                    </a>
                 {% else %}
-                    <a href="{% url 'login' %}" class="btn btn-outline-primary">Войти</a>
-                    <a href="{% url 'register' %}" class="btn btn-primary">Регистрация</a>
+                    <a href="{% url 'login' %}" class="btn btn-outline-primary">
+                        <i class="fa fa-sign-in"></i>
+                        Войти
+                    </a>
+                    <a href="{% url 'register' %}" class="btn btn-primary">
+                        <i class="fa fa-user-plus"></i>
+                        Регистрация
+                    </a>
                 {% endif %}
 
             </div>
