@@ -23,7 +23,8 @@
             <div class="title float-left">
                 <a href="/">
                     <img src="{% static 'images/tennis-ball.png' %}" alt="">
-                    Tennis Mates
+                    <span>Tennis</span>
+                    <span class='highlight'>Friends</span>
                 </a>
             </div>
             <div class="menu float-right">
@@ -51,11 +52,8 @@
 
     <div class="breadcrumbs-block">
         <nav class="breadcrumbs clearfix">
-            <a href="/" class="">Home</a>
-            <span class="delimiter"></span>
-            <a href="/" class="">www</a>
-            <span class="delimiter"></span>
-            <a href="/" class="">site</a>
+            <a href="/" class="">Tennis Friends</a>
+            {% block breadcrumbs %}{% endblock %}
         </nav>
     </div>
 

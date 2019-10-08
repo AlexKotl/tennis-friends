@@ -2,6 +2,11 @@
 {% load bootstrap4 %}
 {% load static %}
 
+{% block breadcrumbs %}
+    <a href="{% url 'players' %}">Игроки</a>
+    <a href="">{{ player.first_name }}</a>
+{% endblock %}
+
 {% block content %}
     <h1>{{ player.first_name }}</h1>
     {% if request.GET.r %}
@@ -51,7 +56,7 @@
                     {% endif %}
                 </div>
             </div>
-            
+
             <div class="messages-list">
                 {% for message in messages %}
                     {% if message.author.id == request.user.id %}

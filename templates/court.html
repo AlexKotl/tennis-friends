@@ -1,6 +1,11 @@
 {% extends 'index.html' %}
 {% load static %}
 
+{% block breadcrumbs %}
+    <a href="{% url 'courts' %}">Корты</a>
+    <a href="">{{ court.name }}</a>
+{% endblock %}
+
 {% block content %}
     <h1>{{ court.name }}</h1>
 {% endblock %}

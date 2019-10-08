@@ -1,7 +1,7 @@
 @import 'theme.scss';
 
 $content_max_width: 1000px;
-$accent_color: #2ed3ae;
+$accent_color: #D3EF2F;
 
 body {
     background-color: #F8F8F8;
@@ -35,20 +35,25 @@ body {
     .top-menu-container {
         max-width: $content_max_width;
         margin: auto;
-        padding: 7px 15px;
+        padding: 12px 15px;
     }
 
     .title {
         a {
             font-size: 20px;
-            color: $accent_color;
+            color: #ddd;
             font-weight: bold;
             text-decoration: none;
+
+            .highlight {
+                color: #D3EF2F;
+            }
         }
 
         img {
             width: 48px;
             height: 48px;
+            margin-right: 7px;
         }
     }
 
@@ -81,7 +86,7 @@ body {
 
     .breadcrumbs {
         max-width: $content_max_width;
-        padding: 10px;
+        padding: 4px 15px 8px 15px;
         margin: auto;
 
         a {
