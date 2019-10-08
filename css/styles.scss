@@ -1,5 +1,6 @@
 @import 'theme.scss';
 
+$content_max_width: 1000px;
 $accent_color: #2ed3ae;
 
 body {
@@ -7,7 +8,7 @@ body {
 }
 
 .main-container {
-    max-width: 1000px;
+    max-width: $content_max_width;
     margin: auto;
     padding: 15px;
     padding-bottom: 200px;
@@ -32,7 +33,7 @@ body {
     color: #eee;
 
     .top-menu-container {
-        max-width: 1000px;
+        max-width: $content_max_width;
         margin: auto;
         padding: 7px 15px;
     }
@@ -71,6 +72,38 @@ body {
 
         .btn-outline-primary {
             color: white;
+        }
+    }
+}
+
+.breadcrumbs-block {
+    background-color: #504d4d;
+
+    .breadcrumbs {
+        max-width: $content_max_width;
+        padding: 10px;
+        margin: auto;
+
+        a {
+            color: #eee;
+            font-size: 12px;
+            text-decoration: none;
+
+            &:hover {
+                color: white;
+            }
+
+            &:before {
+                content: "/";
+                margin: 0 14px;
+                color: #777;
+                text-decoration: none;
+            }
+
+            &:first-child:before {
+                content: "";
+                margin: 0;
+            }
         }
     }
 }
