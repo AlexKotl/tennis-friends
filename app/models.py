@@ -1,3 +1,5 @@
+import json
+import requests
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import User
 from django.db import models
@@ -35,6 +37,22 @@ class Player(AbstractUser):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.email})"
+
+    def get_avatar(self, email):
+        try:
+            response = requests.get("https://api.devidentify.com/{}".format(email))
+        except Exception as err:
+            self.stdout.write("Some error raised while getting API: {}".format(err))
+
+        try:
+            data = json.loads(response.content)
+        except:
+            self.stdout.write("Failed to parse JSON")
+
+        if data['success'] == False or data['profile_picture'] == '':
+            data['profile_picture'] = '-'
+
+        return data['profile_picture']
 
 class Message(models.Model):
     author = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="authors")
