@@ -8,5 +8,7 @@ class Command(BaseCommand):
         players = Player.objects.filter(image_url="")[:10]
         for player in players:
             avatara = player.get_avatar(player.email)
+            player.image_url = avatara
+            player.save()
             self.stdout.write("Got avatara for {}: {}".format(player.email, avatara))
         self.stdout.write("Done")
