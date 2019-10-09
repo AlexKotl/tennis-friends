@@ -21,9 +21,11 @@
                 </div>
                 <div class="col-md-9">
                     <h1>{{ player.first_name }}</h1>
+                    <i class="fa fa-trophy"></i>
                     Уровень: <b>{{ player.rank }}</b><br>
                     {% if player.player_since > 0 %}
-                        Игровой опыт: <b>с {{ player.player_since }}</b>
+                        <i class="fa fa-calendar"></i>
+                        Игровой опыт: <b>с {{ player.player_since }}</b> года
                     {% endif %}
                 </div>
             </div>

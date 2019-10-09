@@ -27,3 +27,6 @@ a {
   .card-body .card-title {
     font-size: 15px;
     margin: 7px 0; }
+
+.modal-body {
+  font-size: 13px; }

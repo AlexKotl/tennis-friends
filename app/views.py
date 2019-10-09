@@ -68,8 +68,10 @@ class MessageView(LoginRequiredMixin, View):
 
 class CourtView(View):
     def get(self, request, id):
+        court = Court.objects.annotate(players_count=Count('player')).get(pk=id)
         return render(request, 'court.html', {
-            'court': Court.objects.get(pk=id)
+            'court': court,
+            'players': Player.objects.filter(courts=court),
         })
 
 class RegisterView(generic.CreateView):

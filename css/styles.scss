@@ -7,6 +7,10 @@ body {
     background-color: #F8F8F8;
 }
 
+i.fa {
+    margin-right: 3px; // add small margin to all icons
+}
+
 .main-container {
     max-width: $content_max_width;
     margin: auto;
@@ -142,7 +146,10 @@ body {
 }
 
 .courts-list {
-
+    .court {
+        text-decoration: none;
+        color: #333;
+    }
 }
 
 .messages-list {
@@ -186,22 +193,20 @@ body {
 }
 
 .home-page {
-    .top-players {
-        .player {
-            font-size: 11px;
-            color: #333;
-            text-align: center;
-            margin: 10px 0;
 
-            .title {
-                font-size: 13px;
-            }
-        }
-    }
 }
 
-.modal-body {
-    font-size: 13px;
+.top-players {
+    .player {
+        font-size: 11px;
+        color: #333;
+        text-align: center;
+        margin: 10px 0;
+
+        .title {
+            font-size: 13px;
+        }
+    }
 }
 
 .site-footer {
