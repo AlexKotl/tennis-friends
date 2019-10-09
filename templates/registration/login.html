@@ -6,7 +6,9 @@
 
 {% block content %}
     {% if form.errors %}
-        <p>Логин или пароль неправильные.</p>
+        <div class="alert alert-danger">
+            Логин или пароль неправильные.
+        </div>
     {% endif %}
 
     <div class="row" style='padding-top: 100px;'>
