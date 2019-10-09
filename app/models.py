@@ -23,6 +23,7 @@ class Player(AbstractUser):
     email = models.CharField(max_length=180, unique=True)
     phone = models.CharField(max_length=180)
     courts = models.ManyToManyField(Court)
+    image_url = models.CharField(max_length=255)
     is_looking = models.BooleanField(default=False)
     is_looking_date = models.DateTimeField(auto_now=True)
     rank = models.FloatField(default=0)
