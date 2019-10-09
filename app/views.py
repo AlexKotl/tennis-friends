@@ -74,6 +74,12 @@ class CourtView(View):
             'players': Player.objects.filter(courts=court),
         })
 
+class FriendsView(LoginRequiredMixin, View):
+    def get(self, request):
+        return render(request, 'friends.html', {
+            'players': Player.objects.filter(is_active=1).order_by('-pk'),
+        })
+
 class RegisterView(generic.CreateView):
     form_class = PlayerCreationForm
     success_url = reverse_lazy('login')
