@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block breadcrumbs %}
+    <a href="">Ваши друзья</a>
+{% endblock %}
+
+{% block content %}
+    <h1>Ваши друзья</h1>
+    <div class="friends-list">
+        {% for message in messages %}
+            <li>{{ message }}
+            friend:
+            {% if message.author.id == request.user.id %}
+                {{ message.recipient }}
+            {% else %}
+                {{ message.author }}
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

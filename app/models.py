@@ -43,4 +43,4 @@ class Message(models.Model):
     date_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.text}"
+        return f"{self.text} (from: {self.author.first_name} -> {self.recipient.first_name})"

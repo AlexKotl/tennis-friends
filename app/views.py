@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.views import View, generic
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.core.mail import send_mail
 from django.conf import settings
 from .models import Player, Court, Message
@@ -76,8 +76,21 @@ class CourtView(View):
 
 class FriendsView(LoginRequiredMixin, View):
     def get(self, request):
+        user = Player.objects.get(pk=request.user.id)
+        messages = Message.objects.filter(Q(author=user) | Q(recipient=user)).order_by("-pk")
+        # format new list with only top messages from every user
+        player_processed = [user]
+        top_messages = []
+        for message in messages:
+            if message.author not in player_processed or message.recipient not in player_processed:
+                if message.author not in player_processed:
+                    player_processed.append(message.author)
+                if message.recipient not in player_processed:
+                    player_processed.append(message.recipient)
+                top_messages.append(message)
+
         return render(request, 'friends.html', {
-            'players': Player.objects.filter(is_active=1).order_by('-pk'),
+            'messages': top_messages,
         })
 
 class RegisterView(generic.CreateView):
