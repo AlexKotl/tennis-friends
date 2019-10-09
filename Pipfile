@@ -9,6 +9,7 @@ verify_ssl = true
 django = "==2.2.5"
 plural-ru = "*"
 mysqlclient = "==1.4"
+requests = "*"
 
 [requires]
 python_version = "3.6"
