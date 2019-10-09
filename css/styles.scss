@@ -193,7 +193,16 @@ i.fa {
 }
 
 .friends-list {
-    
+    .row {
+        border-bottom: 1px solid #eee;
+        font-size: 13px;
+        padding: 4px 0;
+        margin: 4px 0;
+
+        a {
+            color: #333;
+        }
+    }
 }
 
 .top-players {

@@ -79,14 +79,18 @@ class FriendsView(LoginRequiredMixin, View):
         user = Player.objects.get(pk=request.user.id)
         messages = Message.objects.filter(Q(author=user) | Q(recipient=user)).order_by("-pk")
         # format new list with only top messages from every user
-        player_processed = [user]
+        player_processed = []
         top_messages = []
         for message in messages:
-            if message.author not in player_processed or message.recipient not in player_processed:
-                if message.author not in player_processed:
-                    player_processed.append(message.author)
-                if message.recipient not in player_processed:
-                    player_processed.append(message.recipient)
+            # set actually friend to use in template
+            if message.author == user:
+                message.friend = message.recipient
+            else:
+                message.friend = message.author
+
+            if message.friend not in player_processed:
+                player_processed.append(message.friend)
+
                 top_messages.append(message)
 
         return render(request, 'friends.html', {
