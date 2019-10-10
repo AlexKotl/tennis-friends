@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count, Q
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib.messages.views import SuccessMessageMixin
 from .models import Player, Court, Message
 from .forms import PlayerCreationForm, PlayerChangeForm, MessageForm
 
@@ -102,12 +103,19 @@ class RegisterView(generic.CreateView):
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
 
-class ProfileView(LoginRequiredMixin, generic.UpdateView):
+    def form_valid(self, form):
+        self.object = form.save()
+        print("AFTER SAVING!!!")
+        # do something with self.object
+        # remember the import: from django.http import HttpResponseRedirect
+        return HttpResponseRedirect(self.get_success_url())
+
+class ProfileView(LoginRequiredMixin, SuccessMessageMixin, generic.UpdateView):
     model = Player
     form_class = PlayerChangeForm
     template_name = 'profile.html'
     success_url = reverse_lazy('profile')
-    #fields = ['first_name', 'last_name']
+    success_message = "Профиль сохранен."
 
     def get_object(self, queryset=None):
         return Player.objects.get(pk=self.request.user.id)
