@@ -35,6 +35,7 @@ class PlayerCreationForm(UserCreationForm):
     rank = rank_input
     player_since = player_since_input
     about = about_input
+    is_looking = is_looking_input
 
     class Meta:
         model = Player
