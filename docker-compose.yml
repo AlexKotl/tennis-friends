@@ -2,8 +2,21 @@ version: '3'
 services:
   web:
     build: .
-    ports:
-      - "8000:8000"
-      # - "3306:3306"
+    container_name: tennis
+    volumes:
+      - ./static:/static
+    expose:
+      - "8000"
     env_file:
       - .env
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_tennis
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./static:/static
+    depends_on:
+      - web
