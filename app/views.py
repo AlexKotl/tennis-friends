@@ -7,6 +7,7 @@ from django.db.models import Count, Q
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 from .models import Player, Court, Message
 from .forms import PlayerCreationForm, PlayerChangeForm, MessageForm
 
@@ -98,16 +99,18 @@ class FriendsView(LoginRequiredMixin, View):
             'messages': top_messages,
         })
 
-class RegisterView(generic.CreateView):
+class RegisterView(SuccessMessageMixin, generic.CreateView):
     form_class = PlayerCreationForm
-    success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
+    success_url = reverse_lazy('login')
+    success_message = "Вы успешно зарегистрировались. Теперь вы можете войти в систему."
 
     def form_valid(self, form):
         # getting avatar
         self.object = form.save()
         self.object.image_url = self.object.get_avatar(self.object.email)
         self.object.save()
+        messages.success(self.request, self.success_message)
         return HttpResponseRedirect(self.get_success_url())
 
 class ProfileView(LoginRequiredMixin, SuccessMessageMixin, generic.UpdateView):
