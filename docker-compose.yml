@@ -5,6 +5,7 @@ services:
     container_name: tennis
     volumes:
       - ./static:/static
+      - ./app:/data/app
     expose:
       - "8000"
     env_file:
