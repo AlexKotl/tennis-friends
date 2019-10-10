@@ -11,7 +11,7 @@ plural-ru = "*"
 mysqlclient = "==1.4"
 requests = "*"
 gunicorn = "*"
-bootstrap4 = "*"
+django-bootstrap4 = "*"
 
 [requires]
 python_version = "3.6"
