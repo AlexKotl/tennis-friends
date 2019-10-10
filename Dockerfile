@@ -1,4 +1,4 @@
-FROM: python:3.6.5
+FROM python:3.6.5
 
 MAINTAINER AlexKotl
 
@@ -8,4 +8,11 @@ ADD . /usr/src/app
 # set the default directory where CMD will execute
 WORKDIR /usr/src/app
 
-CMD exec gunicorn tennis.wsgi:application --bind 0.0.0.0:8000 --workers 3
+RUN pip install pipenv
+RUN pipenv install --system --deploy --ignore-pipfile
+
+# Expose ports
+EXPOSE 8000
+#EXPOSE 3306
+
+CMD exec gunicorn app.wsgi:application --bind 0.0.0.0:8000 --workers 3
