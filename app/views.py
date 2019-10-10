@@ -104,10 +104,10 @@ class RegisterView(generic.CreateView):
     template_name = 'registration/register.html'
 
     def form_valid(self, form):
+        # getting avatar
         self.object = form.save()
-        print("AFTER SAVING!!!")
-        # do something with self.object
-        # remember the import: from django.http import HttpResponseRedirect
+        self.object.image_url = self.object.get_avatar(self.object.email)
+        self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
 class ProfileView(LoginRequiredMixin, SuccessMessageMixin, generic.UpdateView):

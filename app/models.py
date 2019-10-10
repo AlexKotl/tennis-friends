@@ -43,11 +43,13 @@ class Player(AbstractUser):
             response = requests.get("https://api.devidentify.com/{}".format(email))
         except Exception as err:
             self.stdout.write("Some error raised while getting API: {}".format(err))
+            return
 
         try:
             data = json.loads(response.content)
         except:
             self.stdout.write("Failed to parse JSON")
+            return
 
         if data['success'] == False or data['profile_picture'] == '':
             data['profile_picture'] = '-'
