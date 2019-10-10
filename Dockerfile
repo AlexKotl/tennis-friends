@@ -13,6 +13,5 @@ RUN pipenv install --system --deploy --ignore-pipfile
 
 # Expose ports
 EXPOSE 8000
-#EXPOSE 3306
 
 CMD exec gunicorn app.wsgi:application --bind 0.0.0.0:8000 --workers 3

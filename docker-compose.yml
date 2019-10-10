@@ -4,6 +4,6 @@ services:
     build: .
     ports:
       - "8000:8000"
-      #- "3306:3306"
+      # - "3306:3306"
     env_file:
       - .env
