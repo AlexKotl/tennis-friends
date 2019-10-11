@@ -78,8 +78,12 @@ i.fa {
         }
 
         .profile-actions {
-            font-size: 14px;
+            font-size: 12px;
             margin-left: 20px;
+
+            a {
+                color: $accent_color;
+            }
         }
 
         .btn {
