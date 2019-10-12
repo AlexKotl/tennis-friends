@@ -10,18 +10,19 @@
     <div class="friends-list">
         {% for message in messages %}
             <div class="row">
-                <div class="col-2 col-sm-1">
+                <div class="col-4 col-sm-1">
                     <a href="{% url 'player' message.friend.id %}">
                         <div class="background-image circle" style="background-image: url('{% firstof message.friend.image '/static/images/blank-player2.jpg' %}')"></div>
                     </a>
                 </div>
-                <div class="col-6 col-sm-6 justify-content-center align-self-center">
+                <div class="col-8 col-sm-6 justify-content-center align-self-center">
                     <a href="{% url 'player' message.friend.id %}">
                         <b>{{ message.friend.first_name }}</b>
                     </a>
                 </div>
-                <div class="col-2 col-sm-2">
+                <div class="col-12 col-sm-2">
                     <a href="{% url 'player' message.friend.id %}">
+                        <i class="fa fa-comment-o"></i>
                         {{ message.text }}
                     </a>
                 </div>

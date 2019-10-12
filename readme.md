@@ -9,12 +9,11 @@ Built with Python + Django, Mysql, Bootstrap 4, Docker.
 - `python manage.py createsuperuser`
 
 ## Docker ##
-Build docker image: `docker build . --tag "tennis:1.0"`
+- Build docker image: `docker build . --tag "tennis:1.0"`
+- Run docker image `docker run -p 8000:8000 -i -t <ID>`
 
-Run docker image `docker run -p 8000:8000 -i -t <ID>`
-
-Or use `docker-compose`: `docker-compose up --build`
+Or use Docker Compose: `docker-compose up --build`
 
 For proper DB work set in docker container env for DB host: `DB_HOST=host.docker.internal`
 
-For Mac add static folder and `nginx/conf` to `Preferences -> File Sharing`
+For Mac: add `static`, `app` and `nginx` folders to `Preferences -> File Sharing` of Docker.
