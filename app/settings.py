@@ -134,6 +134,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = 'emails'
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static/'
 STATICFILES_DIRS = ( os.path.join('static'), )
 
 AUTH_USER_MODEL = 'app.Player'

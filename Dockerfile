@@ -7,6 +7,7 @@ WORKDIR /data
 
 RUN pip install pipenv
 RUN pipenv install --system --deploy --ignore-pipfile
+RUN python manage.py collectstatic
 
 EXPOSE 8000
 
