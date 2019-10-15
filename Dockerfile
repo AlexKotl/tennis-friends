@@ -7,8 +7,7 @@ WORKDIR /data
 
 RUN pip install pipenv
 RUN pipenv install --system --deploy --ignore-pipfile
-RUN python manage.py collectstatic
 
 EXPOSE 8000
 
-CMD exec gunicorn app.wsgi:application --bind 0.0.0.0:8000 --workers 3
+CMD exec gunicorn app.wsgi:application --bind 0.0.0.0:8000 --workers 3 && python manage.py collectstatic
