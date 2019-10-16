@@ -28,7 +28,7 @@ SECRET_KEY = '_k3kpd5gy1oaueh!@vpc9$@#-_vvtx=@5vfgi96h2_&0$p)079'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['web']
+ALLOWED_HOSTS = ['web', 'localhost']
 
 
 # Application definition
@@ -135,7 +135,7 @@ EMAIL_FILE_PATH = 'emails'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static/'
-STATICFILES_DIRS = ( os.path.join('static'), )
+# STATICFILES_DIRS = ( os.path.join('static'), )
 
 AUTH_USER_MODEL = 'app.Player'
 LOGIN_URL = 'login'
