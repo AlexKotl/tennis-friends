@@ -1,7 +1,9 @@
-version: '3'
+version: '3.4'
 services:
   web:
-    build: .
+    build:
+      network: host
+      context: .
     container_name: tennis
     volumes:
       - ./static:/static
