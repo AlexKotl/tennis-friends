@@ -33,7 +33,7 @@ class Player(AbstractUser):
     about = models.TextField(default="")
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['email']
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.email})"
