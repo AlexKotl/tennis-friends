@@ -1,6 +1,10 @@
 {% extends 'index.html' %}
 {% load static %}
 
+{% block site_title %}
+    {{ court.name }} - игроки которые играют на теннисном корте
+{% endblock %}
+
 {% block breadcrumbs %}
     <a href="{% url 'courts' %}">Корты</a>
     <a href="">{{ court.name }}</a>

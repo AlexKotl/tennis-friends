@@ -17,3 +17,5 @@ Or use Docker Compose: `docker-compose up --build`
 For proper DB work set in docker container env for DB host: `DB_HOST=host.docker.internal`
 
 For Mac: add `static`, `app` and `nginx` folders to `Preferences -> File Sharing` of Docker.
+
+Run commands inside Docker: `docker exec -it <mycontainer> bash`
