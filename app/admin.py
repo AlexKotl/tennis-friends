@@ -8,8 +8,11 @@ class PlayerAdmin(UserAdmin):
     add_form = PlayerCreationForm
     form = PlayerChangeForm
     model = Player
-    list_display = ['email', 'username',]
+    list_display = ['email', 'phone', 'rank']
 
-admin.site.register(Player)
-admin.site.register(Court)
+class CourtAdmin(admin.ModelAdmin):
+    list_display = ['name', 'address', 'phone',]
+
+admin.site.register(Player, PlayerAdmin)
+admin.site.register(Court, CourtAdmin)
 admin.site.register(Message)
