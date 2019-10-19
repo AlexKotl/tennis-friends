@@ -11,7 +11,27 @@
 {% endblock %}
 
 {% block content %}
+
+
     <h1>Корты</h1>
+
+    <div id="map" class="map" style="width:100%; height:500px"></div>
+    <script type="text/javascript">
+        var map = new ol.Map({
+            target: 'map',
+            layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.OSM()
+                })
+            ],
+            view: new ol.View({
+                center: ol.proj.fromLonLat([30.5133, 50.4425]),
+                zoom: 11
+            })
+        });
+    </script>
+    <br><br>
+
     <div class="courts-list row">
         {% for court in courts %}
             <div class="col-sm-6 col-md-6 col-lg-4">
