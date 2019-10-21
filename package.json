@@ -20,7 +20,8 @@
     "bootstrap": "^4.3.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
-    "ol": "^6.0.1"
+    "ol": "^6.0.1",
+    "tablesorter": "^2.31.1"
   },
   "devDependencies": {
     "gulp": "^4.0.2",

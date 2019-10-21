@@ -32,27 +32,50 @@
                 marker.bindPopup("<b>{{ court.name }}</b><br>{{ court.address }}<br><a href='{% url 'court' court.id %}'>Подробнее</a>");
             {% endif %}
         {% endfor %}
+
+        $(function() {
+            $(".courts-list table").tablesorter();
+        });
     </script>
     <br><br>
 
     <div class="courts-list row">
-        {% for court in courts %}
-            <div class="col-sm-6 col-md-6 col-lg-4">
-                <a href="{% url 'court' court.id %}" class="court card">
-                    <img class="card-img-top" src="{% static 'images/blank-court.jpg' %}" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ court.name }}</h5>
-                        <p class="card-text">
+        <table class="tablesorter-bootstrap table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Корты</th>
+                    <th>Адрес</th>
+                    <th>Телефон</th>
+                    <th>Игроки</th>
+                    <th data-sorter="false"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for court in courts %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'court' court.id %}">{{ court.name }}</a>
+                        </td>
+                        <td>
                             <i class="fa fa-map-marker"></i>
                             {{ court.address }}
-                        </p>
-                        <p class="card-text">
-                            <i class="fa fa-users"></i>
-                            {{ court.players_count }} {{ court.players_count | pluralize:"игрок,игрока,игроков" }}
-                        </p>
-                    </div>
-                </a>
-            </div>
-        {% endfor %}
+                        </td>
+                        <td>
+                            <i class="fa fa-phone"></i>
+                            {{ court.phone }}
+                        </td>
+                        <td>
+                            {% if court.players_count > 0 %}
+                                <i class="fa fa-users"></i>
+                                {{ court.players_count }} {{ court.players_count | pluralize:"игрок,игрока,игроков" }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{% url 'court' court.id %}" class="btn btn-primary">Подробнее</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}
