@@ -8,6 +8,8 @@ Built with Python + Django, Mysql, Bootstrap 4, Docker.
 - `python manage.py migrate`
 - `python manage.py createsuperuser`
 
+Start with Gunicorn: `gunicorn app.wsgi:application --bind 0.0.0.0:8000 --workers 3`
+
 ## Docker ##
 - Build docker image: `docker build . --tag "tennis:1.0"`
 - Run docker image `docker run -p 8000:8000 -i -t <ID>`

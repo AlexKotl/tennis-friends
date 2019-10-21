@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block breadcrumbs %}
-    <a href="">Корты</a>
+    <a href="">Корты Киева на карте</a>
 {% endblock %}
 
 {% block content %}
@@ -17,7 +17,7 @@
 
     <div id="map" class="map" style="width:100%; height:500px"></div>
     <script type="text/javascript">
-        var map = L.map('map').setView([50.4425, 30.5133], 11);
+        var map = L.map('map').setView([50.4425, 30.5133], 12);
 
         L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution:'Map data <a target="_blank" href="http://www.openstreetmap.org">OpenStreetMap.org</a> contributors, ' +
