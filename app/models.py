@@ -24,13 +24,13 @@ class Player(AbstractUser):
     username = models.CharField(max_length=180, unique=False)
     email = models.CharField(max_length=180, unique=True)
     phone = models.CharField(max_length=180, blank=True)
-    courts = models.ManyToManyField(Court)
+    courts = models.ManyToManyField(Court, blank=True)
     image_url = models.CharField(max_length=255, blank=True)
     is_looking = models.BooleanField(default=False)
     is_looking_date = models.DateTimeField(auto_now=True)
     rank = models.FloatField(default=0)
     player_since = models.IntegerField(default=0)
-    about = models.TextField(default="")
+    about = models.TextField(default="",blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
