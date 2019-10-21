@@ -25,6 +25,9 @@
             maxZoom: 18,
             id: 'mapbox.streets',
         }).addTo(map);
+
+        var marker = L.marker([50.4425, 30.5133]).addTo(map);
+        marker.bindPopup("<b>Теннисный корт</b><br><a href=''>Подробнее</a>");
     </script>
     <br><br>
 
