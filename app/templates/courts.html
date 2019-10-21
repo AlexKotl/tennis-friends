@@ -33,19 +33,21 @@
             {% endif %}
         {% endfor %}
 
-        $(".courts-list table").tablesorter();
+        $(function() {
+            $(".courts-list table").tablesorter();
+        });
     </script>
     <br><br>
 
     <div class="courts-list row">
-        <table>
+        <table class="tablesorter-bootstrap table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>Корты</th>
                     <th>Адрес</th>
                     <th>Телефон</th>
                     <th>Игроки</th>
-                    <th></th>
+                    <th data-sorter="false"></th>
                 </tr>
             </thead>
             <tbody>
@@ -69,7 +71,7 @@
                             {% endif %}
                         </td>
                         <td>
-                            <a href="{% url 'court' court.id %}" class="bnt btn-primary">Подробнее</a>
+                            <a href="{% url 'court' court.id %}" class="btn btn-primary">Подробнее</a>
                         </td>
                     </tr>
                 {% endfor %}
