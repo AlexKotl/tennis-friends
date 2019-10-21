@@ -1,0 +1,12 @@
+[Unit]
+Description=Gunicorn server
+
+[Service]
+Restart=on-failure
+User=slicer
+WorkingDirectory=/home/slicer/tennis
+
+ExecStart=/home/slicer/.local/bin/pipenv run gunicorn app.wsgi:application --bind unix:/run/gunicorn/tennis.socket --workers 3
+
+[Install]
+WantedBy=multi-user.target
