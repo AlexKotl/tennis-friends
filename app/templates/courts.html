@@ -26,8 +26,12 @@
             id: 'mapbox.streets',
         }).addTo(map);
 
-        var marker = L.marker([50.4425, 30.5133]).addTo(map);
-        marker.bindPopup("<b>Теннисный корт</b><br><a href=''>Подробнее</a>");
+        {% for court in courts %}
+            {% if court.map_lat != 0 and court.map_lng != 0 %}
+                var marker = L.marker([court.map_lat, court.map_lng]).addTo(map);
+                marker.bindPopup("<b>Теннисный корт</b><br><a href=''>Подробнее</a>");
+            {% endif %}
+        {% endfor %}
     </script>
     <br><br>
 
