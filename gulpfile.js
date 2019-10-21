@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 
-var input = ['css/styles.scss'];
+var input = ['scss/styles.scss'];
 var output = 'static';
 
 function css() {

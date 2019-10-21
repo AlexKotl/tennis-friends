@@ -31,19 +31,8 @@
                     <span class='highlight'>Friends</span>
                 </a>
             </div>
-            <div class="menu float-right">
-                <a href="{% url 'players' %}" class="menu-item">
-                    <img src="{% static 'images/icons/racket-white.png' %}" class="icon" alt="">
-                    Игроки
-                </a>
-                <a href="{% url 'courts' %}" class="menu-item">
-                    <img src="{% static 'images/icons/court-white.png' %}" class="icon" alt="">
-                    Корты
-                </a>
-                <a href="{% url 'friends' %}" class="menu-item" style="margin-right: 30px">
-                    <img src="{% static 'images/icons/handshake-white.png' %}" class="icon" alt="">
-                    Друзья
-                </a>
+
+            <div class="menu user-block float-right">
                 {% if user.is_authenticated %}
                     <span class="profile-actions">
                         Привет,
@@ -66,8 +55,23 @@
                         Регистрация
                     </a>
                 {% endif %}
-
             </div>
+
+            <div class="menu main-chapters float-right">
+                <a href="{% url 'players' %}" class="menu-item">
+                    <img src="{% static 'images/icons/racket-white.png' %}" class="icon" alt="">
+                    Игроки
+                </a>
+                <a href="{% url 'courts' %}" class="menu-item">
+                    <img src="{% static 'images/icons/court-white.png' %}" class="icon" alt="">
+                    Корты
+                </a>
+                <a href="{% url 'friends' %}" class="menu-item" style="margin-right: 30px">
+                    <img src="{% static 'images/icons/handshake-white.png' %}" class="icon" alt="">
+                    Друзья
+                </a>
+            </div>
+
         </div>
     </div>
 
