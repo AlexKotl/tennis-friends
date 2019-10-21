@@ -11,7 +11,30 @@
 {% endblock %}
 
 {% block content %}
+
+
     <h1>Корты</h1>
+
+    <div id="map" class="map" style="width:100%; height:500px"></div>
+    <script type="text/javascript">
+        var map = L.map('map').setView([50.4425, 30.5133], 11);
+
+        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution:'Map data <a target="_blank" href="http://www.openstreetmap.org">OpenStreetMap.org</a> contributors, ' +
+                '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            maxZoom: 18,
+            id: 'mapbox.streets',
+        }).addTo(map);
+
+        {% for court in courts %}
+            {% if court.map_lat != 0 and court.map_lng != 0 %}
+                var marker = L.marker([{{ court.map_lat }}, {{ court.map_lng }}]).addTo(map);
+                marker.bindPopup("<b>{{ court.name }}</b><br>{{ court.address }}<br><a href='{% url 'court' court.id %}'>Подробнее</a>");
+            {% endif %}
+        {% endfor %}
+    </script>
+    <br><br>
+
     <div class="courts-list row">
         {% for court in courts %}
             <div class="col-sm-6 col-md-6 col-lg-4">
