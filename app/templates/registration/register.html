@@ -46,6 +46,38 @@
         <div class="form-group row">
             <label class="col-md-3 col-form-label">Корты</label>
             <div class="col-md-9">
+                <div id="map" class="map" style="width:100%; height:400px"></div>
+                <script type="text/javascript">
+                    var map = L.map('map').setView([50.4425, 30.5133], 12);
+
+                    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution:'Map data <a target="_blank" href="http://www.openstreetmap.org">OpenStreetMap.org</a> contributors, ' +
+                            '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+                        maxZoom: 18,
+                    }).addTo(map);
+
+                    var MarkerIcon = L.Icon.extend({
+                        options: {
+                            iconSize:     [48, 48],
+                            iconAnchor:   [24, 48],
+                            popupAnchor:  [0, -48]
+                        }
+                    });
+                    var enabledIcon = new MarkerIcon({iconUrl: '{% static 'images/icons/map-marker-ball.png' %}'});
+                    var disabledIcon = new MarkerIcon({iconUrl: '{% static 'images/icons/map-marker.png' %}'});
+
+                    {% for court in form.fields.courts.queryset %}
+                        {% if court.map_lat != 0 and court.map_lng != 0 %}
+                            var marker = L.marker([{{ court.map_lat }}, {{ court.map_lng }}], {icon: enabledIcon}).addTo(map);
+                            marker.bindPopup("<b>{{ court.name }}</b>");
+                            marker.on('click', function(e) {
+                                console.log(this);
+                                e.target.setIcon(disabledIcon);
+                                //this.options.icon = disabledIcon;
+                            });
+                        {% endif %}
+                    {% endfor %}
+                </script>
                 <div>
                     {{ form.courts.errors }}
                     {% for court in form.fields.courts.queryset %}
@@ -100,7 +132,7 @@
         <div class="form-group row">
             <label class="col-md-3 col-form-label" for="id_password1">Пароль</label>
             <div class="col-md-9">
-                <input type="password" name="password1" class="form-control" placeholder="Password" required="" id="id_password1">
+                <input type="password" name="password1" class="form-control" placeholder="Пароль" required="" id="id_password1">
                 <small class="form-text text-muted">
                     <ul>
                         <li>Your password can't be too similar to your other personal information.</li>
@@ -115,8 +147,8 @@
         <div class="form-group row">
             <label class="col-md-3 col-form-label" for="id_password2">Пароль еще раз</label>
             <div class="col-md-9">
-                <input type="password" name="password2" class="form-control" placeholder="Password confirmation" title="Enter the same password as before, for verification." required="" id="id_password2">
-                <small class="form-text text-muted">Enter the same password as before, for verification.</small>
+                <input type="password" name="password2" class="form-control" placeholder="Пароль" required="" id="id_password2">
+                <small class="form-text text-muted">Введите такой же пароль, как вы ввели выше.</small>
             </div>
         </div>
 
