@@ -17,7 +17,7 @@
             <h2>Поиска партнеров по теннису</h2>
             <p>Ищите с кем поиграть в Киеве? Наш сервис поможет найти партнера по теннису на вашем любимом корте.</p>
             <div class="row">
-                <div class="col-sm-3 col-xs-6">
+                <div class="col-sm-3 col-6">
                     <a href="{% url 'courts' %}">
                         <div class="background-image circle" style="background-image: url('{% static 'images/blank-court.jpg' %}')"></div>
                     </a>
@@ -26,11 +26,12 @@
                     В разделе кортов можно найти ближайший корт <b>на карте</b> и просмотреть игроков, которые на нем играют.
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-sm-9 justify-content-center align-self-center">
                     Также можете перейти в раздел игроков и найти партнера по уровню игры.
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-3 col-6">
                     <a href="{% url 'players' %}">
                         <div class="background-image circle" style="background-image: url('{% static 'images/player-girl.jpg' %}')"></div>
                     </a>
@@ -47,6 +48,7 @@
                     <a href="{% url 'login' %}" class="btn btn-outline-primary">Войдите</a>
 
                 </div>
+                <br><br>
             {% endif %}
         </div>
         <div class="col-md-5">
