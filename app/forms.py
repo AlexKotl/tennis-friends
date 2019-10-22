@@ -41,6 +41,11 @@ class PlayerCreationForm(UserCreationForm):
         model = Player
         fields = ( 'email', 'first_name', 'phone', 'courts', 'rank', 'player_since', 'is_looking', 'about')
 
+    def __init__(self, *args, **kwargs):
+        super(PlayerCreationForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+
 class PlayerChangeForm(UserChangeForm):
     courts = courts_input
     rank = rank_input

@@ -26,7 +26,102 @@
 
     <form method="post">
         {% csrf_token %}
-        {% bootstrap_form form layout="horizontal" %}
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label">Email</label>
+            <div class="col-md-9">
+                {{ form.email.errors }}
+                {{ form.email }}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label">Имя</label>
+            <div class="col-md-9">
+                {{ form.first_name.errors }}
+                {{ form.first_name }}
+                <small class="form-text text-muted">Ваше полное имя</small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label">Корты</label>
+            <div class="col-md-9">
+                <div>
+                    {{ form.courts.errors }}
+                    {% for court in form.fields.courts.queryset %}
+                        <div class="form-check col-12 col-sm-4">
+                            <label class="form-check-label">
+                                <input class="form-check-input" name="courts" type="checkbox" value="{{ court.id }}" />
+                                {{ court.name }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label">Уровень игры</label>
+            <div class="col-md-9">
+                {{ form.rank.errors }}
+                {{ form.rank }}
+                <small class="form-text text-muted"><a href="#" data-toggle="modal" data-target="#rankModal">Как определить свой уровень?</a></small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label">Игровой опыт</label>
+            <div class="col-md-9">
+                {{ form.player_since.errors }}
+                {{ form.player_since }}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="id_is_looking">&nbsp;</label>
+            <div class="col-md-9">
+                <div class="form-check">
+                    <input type="checkbox" name="is_looking" class="form-check-input" id="id_is_looking">
+                    <label class="form-check-label" for="id_is_looking" title="Отметьте галочку, если вы ищете партнера.">Ищу партнера</label>
+                    <small class="form-text text-muted">Отметьте галочку, если вы ищете партнера.</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label">О себе</label>
+            <div class="col-md-9">
+                {{ form.about.errors }}
+                <textarea name="about" cols="10" rows="4" class="form-control" placeholder="О себе" title="Расскажите о себе, ваш опыт игры, увлечения и т.д." id="id_about"></textarea>
+                <small class="form-text text-muted">Расскажите о себе, ваш опыт игры, увлечения и т.д.</small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="id_password1">Пароль</label>
+            <div class="col-md-9">
+                <input type="password" name="password1" class="form-control" placeholder="Password" required="" id="id_password1">
+                <small class="form-text text-muted">
+                    <ul>
+                        <li>Your password can't be too similar to your other personal information.</li>
+                        <li>Your password must contain at least 8 characters.</li>
+                        <li>Your password can't be a commonly used password.</li>
+                        <li>Your password can't be entirely numeric.</li>
+                    </ul>
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="id_password2">Пароль еще раз</label>
+            <div class="col-md-9">
+                <input type="password" name="password2" class="form-control" placeholder="Password confirmation" title="Enter the same password as before, for verification." required="" id="id_password2">
+                <small class="form-text text-muted">Enter the same password as before, for verification.</small>
+            </div>
+        </div>
+
+
+
         <input type="submit" value="Регистрация" class="btn btn-primary">
     </form>
 
