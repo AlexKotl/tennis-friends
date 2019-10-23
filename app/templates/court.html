@@ -26,7 +26,13 @@
 
 
             {% if court.map_lat != 0 and court.map_lng != 0 %}
-                <div id="map" class="map" style="width:100%; height:300px"></div>
+                <a class="btn btn-primary d-sm-none" data-toggle="collapse" href="#collapse_map">
+                    <i class="fa fa-map"></i> Показать карту
+                </a>
+                <div id="collapse_map" class="collapse show">
+                    <div id="map" class="map" style="width:100%; height:300px"></div>
+                </div>
+
                 <script type="text/javascript">
                     var map = L.map('map').setView([{{ court.map_lat }}, {{ court.map_lng }}], 14);
                     L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -35,7 +41,15 @@
                         maxZoom: 18,
                     }).addTo(map);
                     marker = L.marker([{{ court.map_lat }}, {{ court.map_lng }}]).addTo(map);
+
+                    $(function() {
+                        // hide map for mobile devices
+                        if ($(window).width() <= 576) {
+                            $('#collapse_map').removeClass('show');
+                        }
+                    })
                 </script>
+                <br><br>
             {% endif %}
 
         </div>
