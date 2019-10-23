@@ -13,6 +13,6 @@ class PlayerAdmin(UserAdmin):
 class CourtAdmin(admin.ModelAdmin):
     list_display = ['name', 'address', 'phone',]
 
-admin.site.register(Player, PlayerAdmin)
+admin.site.register(Player)
 admin.site.register(Court, CourtAdmin)
 admin.site.register(Message)
