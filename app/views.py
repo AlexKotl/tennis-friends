@@ -101,7 +101,7 @@ class FriendsView(LoginRequiredMixin, View):
 
 class RegisterView(SuccessMessageMixin, generic.CreateView):
     form_class = PlayerCreationForm
-    template_name = 'user/register.html'
+    template_name = 'registration/register.html'
     success_url = reverse_lazy('login')
     success_message = "Вы успешно зарегистрировались. Теперь вы можете войти в систему."
 
@@ -114,7 +114,7 @@ class RegisterView(SuccessMessageMixin, generic.CreateView):
 class ProfileView(LoginRequiredMixin, SuccessMessageMixin, generic.UpdateView):
     model = Player
     form_class = PlayerChangeForm
-    template_name = 'user/register.html'
+    template_name = 'registration/register.html'
     success_url = reverse_lazy('profile')
     success_message = "Профиль сохранен."
 
