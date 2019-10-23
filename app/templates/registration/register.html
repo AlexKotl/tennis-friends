@@ -83,6 +83,15 @@
                             markers['{{ court.id }}'] = marker;
                         {% endif %}
                     {% endfor %}
+
+                    $(document).ready(function() {
+                        $('input[name=courts]').on('change', function(element) {
+                            if (markers[$(this).val()] !== undefined) {
+                                markers[$(this).val()].fire('click');
+                            }
+                        });
+                    })
+
                 </script>
                 <div>
                     {{ form.courts.errors }}
