@@ -105,13 +105,11 @@ class RegisterView(SuccessMessageMixin, generic.CreateView):
     success_url = reverse_lazy('login')
     success_message = "Вы успешно зарегистрировались. Теперь вы можете войти в систему."
 
-    def form_valid(self, form):
-        # getting avatar
-        self.object = form.save()
-        self.object.image_url = self.object.get_avatar(self.object.email)
-        self.object.save()
-        messages.success(self.request, self.success_message)
-        return HttpResponseRedirect(self.get_success_url())
+    # def form_valid(self, form):
+    #     self.object = form.save()
+    #     self.object.save()
+    #     messages.success(self.request, self.success_message)
+    #     return HttpResponseRedirect(self.get_success_url())
 
 class ProfileView(LoginRequiredMixin, SuccessMessageMixin, generic.UpdateView):
     model = Player
