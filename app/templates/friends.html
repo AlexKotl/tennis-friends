@@ -11,6 +11,13 @@
 
 {% block content %}
     <h1>Ваши друзья</h1>
+
+    {% if messages|length == 0 %}
+        <div class="alert alert-info">
+            Здесь будет список ваших переписок с другими игроками.
+        </div>
+    {% endif %}
+
     <div class="friends-list">
         {% for message in messages %}
             <div class="row">

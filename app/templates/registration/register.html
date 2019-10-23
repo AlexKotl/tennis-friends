@@ -127,7 +127,9 @@
                     })
 
                 </script>
-                <br>
+                <p>
+                    <small class="form-text text-muted">Отметьте корты на которых вы играете на карте или выберите из списка ниже:</small>
+                </p>
                 <div class="row">
                     {{ form.courts.errors }}
                     {% for court in form.fields.courts.queryset %}
