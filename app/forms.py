@@ -46,6 +46,13 @@ class PlayerCreationForm(UserCreationForm):
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
 
+    def save(self, commit=True):
+        user = super(PlayerCreationForm, self).save(commit=False)
+        if commit:
+            user.save()
+            self.save_m2m()
+        return user
+
 class PlayerChangeForm(UserChangeForm):
     courts = courts_input
     rank = rank_input
