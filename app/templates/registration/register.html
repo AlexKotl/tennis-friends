@@ -44,6 +44,15 @@
         </div>
 
         <div class="form-group row">
+            <label class="col-md-3 col-form-label">Телефон</label>
+            <div class="col-md-9">
+                {{ form.phone.errors }}
+                {{ form.phone }}
+                <small class="form-text text-muted">Телефон будет скрыт от других пользователей</small>
+            </div>
+        </div>
+
+        <div class="form-group row">
             <label class="col-md-3 col-form-label">Корты</label>
             <div class="col-md-9">
                 <div id="map" class="map" style="width:100%; height:400px"></div>
@@ -150,10 +159,8 @@
                 <input type="password" name="password1" class="form-control" placeholder="Пароль" required="" id="id_password1">
                 <small class="form-text text-muted">
                     <ul>
-                        <li>Your password can't be too similar to your other personal information.</li>
-                        <li>Your password must contain at least 8 characters.</li>
-                        <li>Your password can't be a commonly used password.</li>
-                        <li>Your password can't be entirely numeric.</li>
+                        <li>Должен содержать как минимум 8 символов.</li>
+                        <li>Должен содержать буквы и числа.</li>
                     </ul>
                 </small>
             </div>
