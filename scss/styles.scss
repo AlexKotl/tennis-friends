@@ -162,6 +162,13 @@ i.fa {
         text-decoration: none;
         color: #333;
     }
+
+    td {
+        font-size: 14px;
+        &:first-child {
+            font-weight: bold;
+        }
+    }
 }
 
 .messages-list {
