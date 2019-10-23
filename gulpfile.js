@@ -11,10 +11,14 @@ function css() {
         .pipe(sass())
         .pipe(gulp.dest(output))
       });
-
 }
 
-
+function build() {
+    return gulp.src(input)
+    .pipe(sass())
+    .pipe(gulp.dest(output))
+}
 
 exports.css = css;
+exports.build = build;
 exports.default = gulp.parallel(css);
