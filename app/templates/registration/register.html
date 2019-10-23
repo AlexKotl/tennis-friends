@@ -2,6 +2,10 @@
 {% load static %}
 {% load bootstrap4 %}
 
+{% block site_title %}
+    Регистрация профиля теннисиста
+{% endblock %}
+
 {% block breadcrumbs %}
     {% if request.path == '/register/' %}
         <a href="">Регистрация</a>
