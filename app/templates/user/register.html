@@ -3,11 +3,19 @@
 {% load bootstrap4 %}
 
 {% block breadcrumbs %}
-    <a href="">Регистрация</a>
+    {% if request.path == '/register/' %}
+        <a href="">Регистрация</a>
+    {% else %}
+        <a href="">Профиль игрока</a>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
-    <h1>Регистрация</h1>
+    {% if request.path == '/register/' %}
+        <h1>Регистрация</h1>
+    {% else %}
+        <h1>Профиль</h1>
+    {% endif %}
 
     {% if form.errors %}
         {% for field in form %}
@@ -24,8 +32,18 @@
         {% endfor %}
     {% endif %}
 
+    {% if messages %}
+        <div class="alert alert-success">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+        </div>
+    {% endif %}
+
     <form method="post">
         {% csrf_token %}
+
+        {% if request.path == '/register/' %}
         <div class="form-group row">
             <label class="col-md-3 col-form-label">Email</label>
             <div class="col-md-9">
@@ -33,6 +51,7 @@
                 {{ form.email }}
             </div>
         </div>
+        {% endif %}
 
         <div class="form-group row">
             <label class="col-md-3 col-form-label">Имя</label>
@@ -153,6 +172,7 @@
             </div>
         </div>
 
+        {% if request.path == '/register/' %}
         <div class="form-group row">
             <label class="col-md-3 col-form-label" for="id_password1">Пароль</label>
             <div class="col-md-9">
@@ -173,10 +193,11 @@
                 <small class="form-text text-muted">Введите такой же пароль, как вы ввели выше.</small>
             </div>
         </div>
+        {% endif %}
 
 
 
-        <input type="submit" value="Регистрация" class="btn btn-primary">
+        <input type="submit" value="Сохранить" class="btn btn-primary">
     </form>
 
     {% include "partials/ranks_modal.html" %}
