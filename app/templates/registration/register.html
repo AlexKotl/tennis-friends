@@ -65,18 +65,22 @@
                     });
                     var IconSelected = new MarkerIcon({iconUrl: '{% static 'images/icons/map-marker-ball.png' %}'});
                     var Icon = new MarkerIcon({iconUrl: '{% static 'images/icons/map-marker.png' %}'});
+                    var markers = [];
 
                     {% for court in form.fields.courts.queryset %}
                         {% if court.map_lat != 0 and court.map_lng != 0 %}
                             var marker = L.marker([{{ court.map_lat }}, {{ court.map_lng }}], {icon: Icon}).addTo(map);
                             marker.bindPopup("<b>{{ court.name }}</b>");
                             marker.isSelected = false;
+                            marker.courtId = {{ court.id }};
                             marker.on('click', function(element) {
-                                console.log('marker',element.target)
                                 var is_selected = element.target.isSelected;
                                 element.target.isSelected = !is_selected;
                                 element.target.setIcon(is_selected ? Icon : IconSelected);
+                                $('input[name=courts][value={{ court.id }}]').prop('checked', !is_selected);
                             });
+
+                            markers['{{ court.id }}'] = marker;
                         {% endif %}
                     {% endfor %}
                 </script>
