@@ -173,7 +173,7 @@
             <label class="col-md-3 col-form-label">О себе</label>
             <div class="col-md-9">
                 {{ form.about.errors }}
-                <textarea name="about" cols="10" rows="4" class="form-control" placeholder="О себе" title="Расскажите о себе, ваш опыт игры, увлечения и т.д." id="id_about">{{ form.about.value }}</textarea>
+                <textarea name="about" cols="10" rows="4" class="form-control" placeholder="О себе" title="Расскажите о себе, ваш опыт игры, увлечения и т.д." id="id_about">{% if form.about.value != None %}{{ form.about.value }}{% endif %}</textarea>
                 <small class="form-text text-muted">Расскажите о себе, ваш опыт игры, увлечения и т.д.</small>
             </div>
         </div>

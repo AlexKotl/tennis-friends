@@ -59,9 +59,15 @@ class PlayerChangeForm(UserChangeForm):
     player_since = player_since_input
     about = about_input
     is_looking = is_looking_input
+
     class Meta:
         model = Player
         fields = ('first_name', 'phone', 'courts', 'rank', 'player_since', 'is_looking', 'about')
+
+    def __init__(self, *args, **kwargs):
+        super(PlayerChangeForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
 
 class MessageForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea, required=True)
