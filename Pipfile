@@ -12,6 +12,7 @@ mysqlclient = "==1.4"
 requests = "*"
 gunicorn = "*"
 django-bootstrap4 = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.6"
