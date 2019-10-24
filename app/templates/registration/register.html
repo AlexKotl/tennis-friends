@@ -47,22 +47,14 @@
     <form method="post">
         {% csrf_token %}
 
-        {% if request.path == '/register/' %}
-        <div class="form-group row">
-            <label class="col-md-3 col-form-label">Email</label>
-            <div class="col-md-9">
-                {{ form.email.errors }}
-                {{ form.email }}
-            </div>
-        </div>
-        {% endif %}
+
 
         <div class="form-group row">
             <label class="col-md-3 col-form-label">Имя</label>
             <div class="col-md-9">
                 {{ form.first_name.errors }}
                 {{ form.first_name }}
-                <small class="form-text text-muted">Ваше полное имя</small>
+                <small class="form-text text-muted">Ваше полное имя, которое будет отображаться на сайте</small>
             </div>
         </div>
 
@@ -74,6 +66,16 @@
                 <small class="form-text text-muted">Телефон будет скрыт от других пользователей</small>
             </div>
         </div>
+
+        {% if request.path == '/register/' %}
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label">Email</label>
+            <div class="col-md-9">
+                {{ form.email.errors }}
+                {{ form.email }}
+            </div>
+        </div>
+        {% endif %}
 
         <div class="form-group row">
             <label class="col-md-3 col-form-label">Корты</label>
