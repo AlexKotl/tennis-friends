@@ -138,6 +138,9 @@ STATIC_URL = '/static/'
 # STATIC_ROOT = 'static/'
 STATICFILES_DIRS = ( os.path.join('static'), )
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 AUTH_USER_MODEL = 'app.Player'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'profile'
