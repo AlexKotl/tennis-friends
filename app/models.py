@@ -60,6 +60,7 @@ class Message(models.Model):
     author = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="authors")
     recipient = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="recipients")
     text = models.TextField()
+    is_read = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
