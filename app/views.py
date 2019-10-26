@@ -111,7 +111,7 @@ class RegisterView(SuccessMessageMixin, generic.CreateView):
     form_class = PlayerCreationForm
     template_name = 'registration/register.html'
     success_url = reverse_lazy('login')
-    success_message = "Вы успешно зарегистрировались. Теперь вы можете войти в систему."
+    success_message = "Вы успешно зарегистрировались. Теперь можете войти в систему."
 
     # def form_valid(self, form):
     #     self.object = form.save()

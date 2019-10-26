@@ -7,7 +7,6 @@ def menu(request):
 
     user = Player.objects.get(pk=request.user.id)
     messages = Message.objects.filter(recipient=user, is_read=False)
-
     return {
-        "menu_friends_count": messages.count
+        "menu_friends_count": '' if messages.count() == 0 else messages.count()
     }
