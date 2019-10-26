@@ -41,6 +41,14 @@ class PlayerView(View):
             user = Player.objects.get(pk=request.user.id)
             messages = Message.objects.filter(author__in=[user, player], recipient__in=[user, player]).order_by("-pk")
 
+            # update unread messages count
+            try:
+                user_messages = Message.objects.get(recipient=user, author=player, is_read=False)
+                user_messages.is_read = True
+                user_messages.save()
+            except Message.DoesNotExist:
+                pass
+
         return render(request, 'player.html', {
             'player': player,
             'messages': messages,
