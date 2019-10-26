@@ -31,7 +31,7 @@
                         <b>{{ message.friend.first_name }}</b>
                     </a>
                 </div>
-                <div class="col-12 col-sm-8">
+                <div class="col-12 col-sm-8 {% if message.is_read == 0 and message.recipient.id == request.user.id %}font-weight-bold{% endif %}">
                     <a href="{% url 'player' message.friend.id %}">
                         <i class="fa fa-comment-o"></i>
                         {{ message.text }}
