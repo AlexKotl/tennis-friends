@@ -76,11 +76,7 @@
 
             <div class="messages-list">
                 {% for message in messages %}
-                    {% if message.author.id == request.user.id %}
-                        <div class="message self">
-                    {% else %}
-                        <div class="message">
-                    {% endif %}
+                    <div class="message {% if message.author.id == request.user.id %}self{% endif %}">
                         <div class="text">
                             {{ message.text }}
                         </div>
@@ -88,7 +84,13 @@
                             {{ message.author.first_name }}
                         </div>
                         <div class="date">
-                            {{ message.date_created }}
+                            {{ message.date_created | date:"d.m.Y" }}
+                            {% if message.is_read %}
+                                <i class="fa fa-check text-success" title="Сообщение прочитано"></i>
+                            {% else %}
+                                <i class="fa fa-clock-o" title="Сообщение не прочитано"></i>
+                            {% endif %}
+
                         </div>
                     </div>
                 {% endfor %}
