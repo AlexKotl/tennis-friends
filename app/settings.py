@@ -142,6 +142,7 @@ STATICFILES_DIRS = ( os.path.join('static'), )
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+FILE_UPLOAD_PERMISSIONS = 0o666
 
 AUTH_USER_MODEL = 'app.Player'
 LOGIN_URL = 'login'
