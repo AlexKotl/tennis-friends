@@ -47,7 +47,7 @@ class Player(AbstractUser):
                 super().save() # first save image
                 im = Image.open(self.image.path)
                 im.thumbnail((1000, 1000))
-                im.save(self.image.path, "JPEG")
+                im.save(self.image.path, im.format)
             except IOError:
                 print("cannot create thumbnail for", self.image)
 
