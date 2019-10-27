@@ -1,16 +1,18 @@
 import json
 import requests
+import os
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import User
 from django.db import models
 from datetime import datetime
+from PIL import Image
 
 class Court(models.Model):
     name = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
     phone = models.CharField(max_length=255, default="", blank=True)
     url = models.CharField(max_length=255, default="", blank=True)
-    image = models.CharField(max_length=255, default="", blank=True)
+    image = models.ImageField(upload_to='courts/')
     map_lat = models.FloatField(default=0)
     map_lng = models.FloatField(default=0)
     flag = models.IntegerField(default=1)
@@ -26,6 +28,7 @@ class Player(AbstractUser):
     phone = models.CharField(max_length=180, blank=True)
     courts = models.ManyToManyField(Court, blank=True)
     image_url = models.CharField(max_length=255, blank=True)
+    image = models.ImageField(upload_to='users/')
     is_looking = models.BooleanField(default=False)
     is_looking_date = models.DateTimeField(auto_now=True)
     rank = models.FloatField(default=0)
@@ -37,6 +40,16 @@ class Player(AbstractUser):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.email})"
+
+    def save(self, *args, **kwargs):
+        try:
+            im = Image.open(self.image.name)
+            im.thumbnail((1000, 1000))
+            im.save(self.image.name+'.tmp', "JPEG")
+        except IOError:
+            print("cannot create thumbnail for", self.image)
+
+        super(Court, self).save(*args, **kwargs)
 
     def get_avatar(self, email):
         try:
