@@ -92,9 +92,9 @@
 
                     var MarkerIcon = L.Icon.extend({
                         options: {
-                            iconSize:     [25, 41],
-                            iconAnchor:   [13, 41],
-                            popupAnchor:  [0, -41]
+                            iconSize: [25, 41],
+                            iconAnchor: [13, 41],
+                            popupAnchor: [0, -41]
                         }
                     });
                     var IconSelected = new MarkerIcon({iconUrl: '{% static 'images/icons/map-marker-ball.png' %}'});
@@ -132,7 +132,7 @@
                 <p>
                     <small class="form-text text-muted">Отметьте корты на которых вы играете на карте или выберите из списка ниже:</small>
                 </p>
-                <div class="row">
+                <div class="row" style="padding-left:15px;">
                     {{ form.courts.errors }}
                     {% for court in form.fields.courts.queryset %}
                         <div class="form-check col-12 col-sm-4">
