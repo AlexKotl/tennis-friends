@@ -42,12 +42,13 @@ class Player(AbstractUser):
         return f"{self.first_name} {self.last_name} ({self.email})"
 
     def save(self, *args, **kwargs):
-        # try:
-        #     im = Image.open(self.image.name)
-        #     im.thumbnail((1000, 1000))
-        #     im.save(self.image.name+'.tmp', "JPEG")
-        # except IOError:
-        #     print("cannot create thumbnail for", self.image)
+        try:
+            super().save() # first save image
+            im = Image.open(self.image.path)
+            im.thumbnail((1000, 1000))
+            im.save(self.image.path, "JPEG")
+        except IOError:
+            print("cannot create thumbnail for", self.image)
 
         super(Player, self).save(*args, **kwargs)
 
