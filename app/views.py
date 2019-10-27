@@ -43,9 +43,7 @@ class PlayerView(View):
 
             # update unread messages count
             try:
-                user_messages = Message.objects.get(recipient=user, author=player, is_read=False)
-                user_messages.is_read = True
-                user_messages.save()
+                user_messages = Message.objects.filter(recipient=user, author=player, is_read=False).update(is_read=True)
             except Message.DoesNotExist:
                 pass
 
