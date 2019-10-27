@@ -44,10 +44,8 @@
         </div>
     {% endif %}
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-
-
 
         <div class="form-group row">
             <label class="col-md-3 col-form-label">Имя</label>
@@ -180,6 +178,14 @@
                 {{ form.about.errors }}
                 <textarea name="about" cols="10" rows="4" class="form-control" placeholder="О себе" title="Расскажите о себе, ваш опыт игры, увлечения и т.д." id="id_about">{% if form.about.value != None %}{{ form.about.value }}{% endif %}</textarea>
                 <small class="form-text text-muted">Расскажите о себе, ваш опыт игры, увлечения и т.д.</small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label">Фото</label>
+            <div class="col-md-9">
+                {{ form.image.errors }}
+                {{ form.image }}
             </div>
         </div>
 

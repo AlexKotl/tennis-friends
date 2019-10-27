@@ -39,7 +39,7 @@ class PlayerCreationForm(UserCreationForm):
 
     class Meta:
         model = Player
-        fields = ( 'email', 'first_name', 'phone', 'courts', 'rank', 'player_since', 'is_looking', 'about')
+        fields = ( 'email', 'first_name', 'phone', 'courts', 'rank', 'player_since', 'is_looking', 'about', 'image')
 
     def __init__(self, *args, **kwargs):
         super(PlayerCreationForm, self).__init__(*args, **kwargs)
@@ -62,7 +62,7 @@ class PlayerChangeForm(UserChangeForm):
 
     class Meta:
         model = Player
-        fields = ('first_name', 'phone', 'courts', 'rank', 'player_since', 'is_looking', 'about')
+        fields = ('first_name', 'phone', 'courts', 'rank', 'player_since', 'is_looking', 'about', 'image')
 
     def __init__(self, *args, **kwargs):
         super(PlayerChangeForm, self).__init__(*args, **kwargs)
