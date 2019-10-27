@@ -16,11 +16,7 @@
             <div class="col-sm-6 col-md-4 col-lg-3">
                 <a href="{% url 'player' player.id %}" class="player card">
 
-                    {% if player.image_url != '-' and player.image_url != ''  %}
-                        <div class="background-image card-img-top" style="background-image: url('{{ player.image_url }}')"></div>
-                    {% else %}
-                        <div class="background-image card-img-top" style="background-image: url('{% static 'images/blank-player2.jpg' %}')"></div>
-                    {% endif %}
+                    <div class="background-image card-img-top" style="background-image: url('{% if player.image != '' %}/media/{{ player.image }}{% else %}{% static 'images/blank-player2.jpg' %}{% endif %}')"></div>
 
                     <div class="card-body">
                         <h5 class="card-title">{{ player.first_name }}</h5>

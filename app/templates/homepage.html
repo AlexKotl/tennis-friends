@@ -59,7 +59,7 @@
                         {% for player in players %}
                             <a href="{% url 'player' player.id %}" class="col-4">
                                 <div class="player ">
-                                    <div class="background-image circle square" style="background-image: url('{% firstof player.image '/static/images/blank-player2.jpg' %}')"></div>
+                                    <div class="background-image circle square" style="background-image: url('{% if player.image != '' %}/media/{{ player.image }}{% else %}{% static 'images/blank-player2.jpg' %}{% endif %}')"></div>
                                     <div class="title">
                                         {{ player.first_name }}
                                     </div>

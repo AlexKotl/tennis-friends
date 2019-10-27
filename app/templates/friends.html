@@ -21,9 +21,9 @@
     <div class="friends-list">
         {% for message in messages %}
             <div class="row">
-                <div class="col-4 col-sm-1">
+                <div class="col-4 col-sm-1 justify-content-center align-self-center">
                     <a href="{% url 'player' message.friend.id %}">
-                        <div class="background-image circle" style="background-image: url('{% firstof message.friend.image '/static/images/blank-player2.jpg' %}')"></div>
+                        <div class="background-image circle" style="background-image: url('{% if message.friend.image != '' %}/media/{{ message.friend.image }}{% else %}{% static 'images/blank-player2.jpg' %}{% endif %}')"></div>
                     </a>
                 </div>
                 <div class="col-8 col-sm-3 justify-content-center align-self-center">
@@ -31,7 +31,7 @@
                         <b>{{ message.friend.first_name }}</b>
                     </a>
                 </div>
-                <div class="col-12 col-sm-8 {% if message.is_read == 0 and message.recipient.id == request.user.id %}font-weight-bold{% endif %}">
+                <div class="col-12 col-sm-8 justify-content-center align-self-center {% if message.is_read == 0 and message.recipient.id == request.user.id %}font-weight-bold{% endif %}">
                     <a href="{% url 'player' message.friend.id %}">
                         <i class="fa fa-comment-o"></i>
                         {{ message.text }}
