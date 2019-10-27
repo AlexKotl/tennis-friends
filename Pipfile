@@ -13,6 +13,7 @@ requests = "*"
 gunicorn = "*"
 django-bootstrap4 = "*"
 pillow = "*"
+django-cleanup = "*"
 
 [requires]
 python_version = "3.6"
