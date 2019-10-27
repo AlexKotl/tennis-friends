@@ -1,9 +1,11 @@
 import json
 import requests
+import os
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import User
 from django.db import models
 from datetime import datetime
+from PIL import Image
 
 class Court(models.Model):
     name = models.CharField(max_length=255)
@@ -38,6 +40,16 @@ class Player(AbstractUser):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.email})"
+
+    def save(self, *args, **kwargs):
+        try:
+            im = Image.open(self.image.name)
+            im.thumbnail((1000, 1000))
+            im.save(self.image.name+'.tmp', "JPEG")
+        except IOError:
+            print("cannot create thumbnail for", self.image)
+
+        super(Court, self).save(*args, **kwargs)
 
     def get_avatar(self, email):
         try:
