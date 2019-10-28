@@ -36,7 +36,7 @@
 
             {% if player.about != '' %}
                 <br><br><b>О себе:</b><br>
-                {{ player.about }}
+                {{ player.about | linebreaks }}
             {% endif %}
 
             <br><br>
@@ -78,7 +78,7 @@
                 {% for message in messages %}
                     <div class="message {% if message.author.id == request.user.id %}self{% endif %}">
                         <div class="text">
-                            {{ message.text }}
+                            {{ message.text | linebreaks }}
                         </div>
                         <div class="author">
                             {{ message.author.first_name }}
