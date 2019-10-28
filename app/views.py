@@ -65,8 +65,8 @@ class MessageView(LoginRequiredMixin, View):
         message.save()
 
         send_mail(subject="{} - новое сообщение".format(settings.SITE_NAME),
-            message="Вам пришло новое сообщение от {}: \n\n{}\n\n{}"
-                .format(author.first_name, request.POST.get('text', ''), settings.SITE_URL),
+            message="Вам пришло новое сообщение от {}: \n\n{}\n\nОтветить на сообщение: \n{}"
+                .format(author.first_name, request.POST.get('text', ''), 'http://' + settings.SITE_URL + reverse('player', args=(author.id,))),
             from_email=settings.SITE_EMAIL,
             recipient_list=[recipient.email],
             fail_silently=not settings.DEBUG)
