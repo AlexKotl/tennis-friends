@@ -1,19 +1,33 @@
 $blue: #4080a8;
 
 h1, h2 {
-    font-size: 24px; 
+    font-size: 24px;
 }
 h3 {
     font-size: 20px;
 }
 
+.btn {
+    font-size: 13px;
+    border-radius: 3px;
+    border: 0;
+    border-bottom: 2px solid #42638c;
+    color: white;
+    padding: 6px 28px;
+    cursor: pointer;
+    outline: none;
+
+    i {
+        // margin for icons
+        margin-right: 3px;
+    }
+}
 .btn-primary {
-    background-color: $blue;
-    border-color: #367399;
+    background-color: #4d97d5;
 
     &:hover {
-        background-color: #4f98c6;
-        border-color: #367399;
+        background: #68ace6;
+        border-color: #678ab6;
     }
 }
 .btn-outline-primary {
