@@ -14,7 +14,7 @@ from .forms import PlayerCreationForm, PlayerChangeForm, MessageForm
 class IndexView(View):
     def get(self, request):
         return render(request, 'homepage.html', {
-            'courts': Court.objects.filter(flag=1).annotate(players_count=Count('player')).order_by('-pk')[:6],
+            # 'courts': Court.objects.filter(flag=1).annotate(players_count=Count('player')).order_by('-pk')[:6],
             'players': Player.objects.filter(is_active=1).annotate(courts_count=Count('courts')).order_by('-pk')[:6],
         })
 
