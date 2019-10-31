@@ -1,12 +1,13 @@
 {% load static %}
 <!DOCTYPE HTML>
 <html>
-<head>
+<head xmlns:fb="http://ogp.me/ns/fb#">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>{% block site_title %}{% endblock %}</title>
     <meta name="Language" content="ru"/>
     <meta name="country" content="UA"/>
+    <meta property="og:image" content="{% static 'images/stuff/handshake.jpg' %}" />
 
 
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
