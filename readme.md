@@ -1,4 +1,4 @@
-# Tennis friends #
+# Play Tennis #
 
 This website was created to help tennis players find partners for the game.
 Built with Python + Django, Mysql, Bootstrap 4, Docker.
