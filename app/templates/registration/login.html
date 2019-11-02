@@ -37,7 +37,14 @@
                         <label>Пароль</label>
                         <input type="password" class="form-control" name="password" placeholder="">
                     </div>
-                    <button type="submit" class="btn btn-primary">Войти</button>
+                    <div class="row">
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-primary">Войти</button>
+                        </div>
+                        <div class="col-6 text-right">
+                            <a href="{% url 'password_reset' %}">Забыли пароль?</a>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
