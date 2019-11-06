@@ -250,3 +250,23 @@ i.fa {
         color: white;
     }
 }
+
+@media screen and (max-width: 576px) {
+    .top-menu {
+        .menu {
+            .btn {
+                padding: 5px;
+                font-size: 12px;
+                i {
+                    display: none;
+                }
+            }
+            .menu-item {
+                margin: 4px 8px;
+            }
+            .icon {
+                margin: 0 2px;
+            }
+        }
+    }
+}
