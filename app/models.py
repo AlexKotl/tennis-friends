@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import User
 from django.db import models
 from datetime import datetime
-from PIL import Image
+from PIL import Image, ExifTags
 
 class Court(models.Model):
     name = models.CharField(max_length=255)
@@ -45,7 +45,24 @@ class Player(AbstractUser):
         if self.image:
             try:
                 super().save() # first save image
+
                 im = Image.open(self.image.path)
+
+                # detect image rotation
+                for orientation in ExifTags.TAGS.keys():
+                    if ExifTags.TAGS[orientation] == 'Orientation':
+                        break
+
+                if im._getexif():
+                    exif = dict(im._getexif().items())
+
+                    if exif[orientation] == 3:
+                        im = im.rotate(180, expand=True)
+                    elif exif[orientation] == 6:
+                        im = im.rotate(270, expand=True)
+                    elif exif[orientation] == 8:
+                        im = im.rotate(90, expand=True)
+
                 im.thumbnail((1000, 1000))
                 im.save(self.image.path, im.format)
             except IOError:
