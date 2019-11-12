@@ -94,6 +94,11 @@
                         </div>
                     </div>
                 {% endfor %}
+
+                {% if request.GET.all_messages == null %}
+                    ...<br>
+                    <a href="?all_messages">Показать все сообщения</a>
+                {% endif %}
             </div>
 
         </div>
