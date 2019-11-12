@@ -20,6 +20,7 @@
     "bootstrap": "^4.3.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
+    "jquery-mask-plugin": "^1.14.16",
     "ol": "^6.0.1",
     "tablesorter": "^2.31.1"
   },

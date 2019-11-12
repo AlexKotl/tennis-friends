@@ -15,10 +15,21 @@
 {% endblock %}
 
 {% block content %}
+    <script>
+        $(function() {
+            $('.phone_mask').mask("(0__) ___ __ __", {
+                placeholder: "(0__) ___ __ __",
+                translation: {
+                    0: null, 9: null, '_': {pattern: /\d/, optional: false}
+                }
+            });
+        })
+    </script>
+
     {% if request.path == '/register/' %}
         <h1>Регистрация</h1>
     {% else %}
-        <h1>Профиль</h1>
+        <h1>Ваш профиль</h1>
     {% endif %}
 
     {% if form.errors %}
@@ -60,7 +71,7 @@
             <label class="col-md-3 col-form-label">Телефон</label>
             <div class="col-md-9">
                 {{ form.phone.errors }}
-                {{ form.phone }}
+                <input type="text" name="phone" value="{% if form.phone.value != None %}{{ form.phone.value }}{% endif %}" maxlength="180" class="form-control phone_mask">
                 <small class="form-text text-muted">Телефон будет скрыт от других пользователей</small>
             </div>
         </div>
