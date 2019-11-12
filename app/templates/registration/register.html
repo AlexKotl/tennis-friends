@@ -186,7 +186,7 @@
             <div class="col-md-9">
                 {{ form.image.errors }}
 
-                {% if form.image.value != null %}
+                {% if form.image.value != null and form.image.value != '' %}
                     <p>
                         <img src="/media/{{ form.image.value }}" width="200" alt="User photo">
                         &nbsp;
