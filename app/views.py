@@ -40,6 +40,9 @@ class PlayerView(View):
         if request.user.is_authenticated:
             user = Player.objects.get(pk=request.user.id)
             messages = Message.objects.filter(author__in=[user, player], recipient__in=[user, player]).order_by("-pk")
+            # by default show only last N messages
+            if request.GET.get('all_messages') == None:
+                messages = messages[:20]
 
             # update unread messages count
             try:
