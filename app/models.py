@@ -53,20 +53,21 @@ class Player(AbstractUser):
                     if ExifTags.TAGS[orientation] == 'Orientation':
                         break
 
-                if im._getexif():
-                    exif = dict(im._getexif().items())
+                exif = dict(im._getexif().items())
 
-                    if exif[orientation] == 3:
-                        im = im.rotate(180, expand=True)
-                    elif exif[orientation] == 6:
-                        im = im.rotate(270, expand=True)
-                    elif exif[orientation] == 8:
-                        im = im.rotate(90, expand=True)
+                if exif[orientation] == 3:
+                    im = im.rotate(180, expand=True)
+                elif exif[orientation] == 6:
+                    im = im.rotate(270, expand=True)
+                elif exif[orientation] == 8:
+                    im = im.rotate(90, expand=True)
 
                 im.thumbnail((1000, 1000))
                 im.save(self.image.path, im.format)
             except IOError:
                 print("cannot create thumbnail for", self.image)
+            except (AttributeError, KeyError, IndexError):
+                print("Getting exif error")
 
         super(Player, self).save(*args, **kwargs)
 
