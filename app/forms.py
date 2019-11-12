@@ -1,4 +1,5 @@
 from django import forms
+import django_filters
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model
 from datetime import datetime
@@ -71,3 +72,10 @@ class PlayerChangeForm(UserChangeForm):
 
 class MessageForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea, required=True)
+
+class PlayerFilter(django_filters.FilterSet):
+    # name = django_filters.CharFilter(lookup_expr='iexact')
+
+    class Meta:
+        model = Player
+        fields = ['rank']

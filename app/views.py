@@ -9,7 +9,7 @@ from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from .models import Player, Court, Message
-from .forms import PlayerCreationForm, PlayerChangeForm, MessageForm
+from .forms import PlayerCreationForm, PlayerChangeForm, MessageForm, PlayerFilter
 
 class IndexView(View):
     def get(self, request):
@@ -20,8 +20,10 @@ class IndexView(View):
 
 class PlayersView(View):
     def get(self, request):
+        filter = PlayerFilter(request.GET, queryset=Player.objects.all())
         return render(request, 'players.html', {
             'players': Player.objects.filter(is_active=1).annotate(courts_count=Count('courts')).order_by('-pk'),
+            'filter': filter,
         })
 
 class CourtsView(View):
