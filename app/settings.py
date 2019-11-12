@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SITE_NAME = "Play Tennis"
 SITE_URL = "playtennis.com.ua"
-SITE_EMAIL = "info@playtennis.com.ua"
+SITE_EMAIL = "no-reply@playtennis.com.ua"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -154,4 +154,4 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = os.environ['EMAIL_USER']
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_PASSWORD']
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = "Play Tennis <info@playtennis.com.ua>"
+DEFAULT_FROM_EMAIL = "Play Tennis <no-reply@playtennis.com.ua>"
