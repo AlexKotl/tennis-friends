@@ -8,8 +8,8 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-from .models import Player, Court, Message
-from .forms import PlayerCreationForm, PlayerChangeForm, MessageForm, PlayerFilter
+from .models import Player, Court, Message, PlayerFilter
+from .forms import PlayerCreationForm, PlayerChangeForm, MessageForm
 
 class IndexView(View):
     def get(self, request):

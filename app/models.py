@@ -1,6 +1,7 @@
 import json
 import requests
 import os
+import django_filters
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import User
 from django.db import models
@@ -91,6 +92,13 @@ class Player(AbstractUser):
             data['profile_picture'] = '-'
 
         return data['profile_picture']
+
+class PlayerFilter(django_filters.FilterSet):
+    first_name = django_filters.CharFilter(lookup_expr='iexact')
+
+    class Meta:
+        model = Player
+        fields = ['first_name']
 
 class Message(models.Model):
     author = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="authors")
