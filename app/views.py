@@ -20,9 +20,9 @@ class IndexView(View):
 
 class PlayersView(View):
     def get(self, request):
-        filter = PlayerFilter(request.GET, queryset=Player.objects.all())
+        players = Player.objects.filter(is_active=1).annotate(courts_count=Count('courts')).order_by('-pk');
+        filter = PlayerFilter(request.GET, queryset=players)
         return render(request, 'players.html', {
-            'players': Player.objects.filter(is_active=1).annotate(courts_count=Count('courts')).order_by('-pk'),
             'filter': filter,
         })
 
