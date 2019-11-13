@@ -5,6 +5,7 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count, Q
 from django.core.mail import send_mail
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
@@ -21,9 +22,21 @@ class IndexView(View):
 class PlayersView(View):
     def get(self, request):
         players = Player.objects.filter(is_active=1).annotate(courts_count=Count('courts')).order_by('-pk');
+
         filter = PlayerFilter(request.GET, queryset=players)
+        players = filter.qs
+        paginator = Paginator(players, 4)
+        page = request.GET.get('page')
+
+        try:
+            players = paginator.page(page)
+        except PageNotAnInteger:
+            players = paginator.page(1)
+        except EmptyPage:
+            players = paginator.page(paginator.num_pages)
         return render(request, 'players.html', {
             'filter': filter,
+            'players': players,
         })
 
 class CourtsView(View):
@@ -42,6 +55,9 @@ class PlayerView(View):
         if request.user.is_authenticated:
             user = Player.objects.get(pk=request.user.id)
             messages = Message.objects.filter(author__in=[user, player], recipient__in=[user, player]).order_by("-pk")
+            # by default show only last N messages
+            if request.GET.get('all_messages') == None:
+                messages = messages[:20]
 
             # update unread messages count
             try:
