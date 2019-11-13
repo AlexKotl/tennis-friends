@@ -14,24 +14,22 @@
 
     <div class="card mt-3 mb-3">
         <div class="card-body players-filters">
-            <form action="" method="get" class="row">
-                <div class="col-sm-4">
-                    Уровень: <br>
-                    {{ filter.form.rank__gt }}
-                    -
-                    {{ filter.form.rank__lt }}
-                </div>
+            <form action="" method="get">
+                    Уровень:
+                    <span class="rank mr-5">
+                        {{ filter.form.rank__gt }}
+                        -
+                        {{ filter.form.rank__lt }}
+                    </span>
 
-                <div class="col-sm-4">
-                    Поиск по имени: <br>
+
+
+                    Поиск по имени:
                     {{ filter.form.first_name }}
-                </div>
 
-                <div class="col-sm-4">
                     <button type="submit" class="btn btn-primary pull-right">
                         <i class="fa fa-search"></i> Поиск
                     </button>
-                </div>
             </form>
         </div>
     </div>
