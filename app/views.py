@@ -5,11 +5,11 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count, Q
 from django.core.mail import send_mail
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-from .models import Player, Court, Message
+from .models import Player, Court, Message, PlayerFilter
 from .forms import PlayerCreationForm, PlayerChangeForm, MessageForm
 
 class IndexView(View):
@@ -22,10 +22,20 @@ class IndexView(View):
 class PlayersView(View):
     def get(self, request):
         players = Player.objects.filter(is_active=1).annotate(courts_count=Count('courts')).order_by('-pk');
-        paginator = Paginator(players, 24)
+
+        filter = PlayerFilter(request.GET, queryset=players)
+        players = filter.qs
+        paginator = Paginator(players, 36)
         page = request.GET.get('page')
-        players = paginator.get_page(page)
+
+        try:
+            players = paginator.page(page)
+        except PageNotAnInteger:
+            players = paginator.page(1)
+        except EmptyPage:
+            players = paginator.page(paginator.num_pages)
         return render(request, 'players.html', {
+            'filter': filter,
             'players': players,
         })
 

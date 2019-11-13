@@ -153,6 +153,19 @@ i.fa {
     }
 }
 
+.players-filters {
+    line-height: 34px;
+    select {
+        height: 34px;
+    }
+    input[type=text] {
+        height: 34px;
+    }
+    .rank select {
+        width: 60px;
+    }
+}
+
 .players-list {
     .player {
         text-decoration: none;

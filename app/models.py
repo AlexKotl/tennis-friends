@@ -1,6 +1,7 @@
 import json
 import requests
 import os
+import django_filters
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import User
 from django.db import models
@@ -91,6 +92,25 @@ class Player(AbstractUser):
             data['profile_picture'] = '-'
 
         return data['profile_picture']
+
+class PlayerFilter(django_filters.FilterSet):
+    ranks = [(x/10, x/10) for x in range(10, 75, 5)];
+    rank__gt = django_filters.ChoiceFilter(
+        choices=ranks,
+        empty_label="От",
+        field_name='rank',
+        lookup_expr='gte')
+    rank__lt = django_filters.ChoiceFilter(
+        choices=ranks,
+        empty_label="До",
+        field_name='rank',
+        lookup_expr='lte')
+
+    first_name = django_filters.CharFilter(lookup_expr='icontains')
+
+    class Meta:
+        model = Player
+        fields = []
 
 class Message(models.Model):
     author = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="authors")

@@ -6,11 +6,34 @@
 {% endblock %}
 
 {% block breadcrumbs %}
-    <a href="">Игроки</a>
+    <a href="{% url 'players' %}">Игроки</a>
 {% endblock %}
 
 {% block content %}
     <h1>Игроки</h1>
+
+    <div class="card mt-3 mb-3">
+        <div class="card-body players-filters">
+            <form action="" method="get">
+                    Уровень:
+                    <span class="rank mr-5">
+                        {{ filter.form.rank__gt }}
+                        -
+                        {{ filter.form.rank__lt }}
+                    </span>
+
+
+
+                    Поиск по имени:
+                    {{ filter.form.first_name }}
+
+                    <button type="submit" class="btn btn-primary pull-right">
+                        <i class="fa fa-search"></i> Поиск
+                    </button>
+            </form>
+        </div>
+    </div>
+
     <div class="players-list row">
         {% for player in players %}
             <div class="col-sm-6 col-md-4 col-lg-3">
@@ -39,11 +62,11 @@
     <div class="pagination mt-4">
         <span class="step-links">
             {% if players.has_previous %}
-                <a href="?page={{ players.previous_page_number }}" class="btn btn-light font-weight-bold mr-2">&laquo; Назад</a>
+                <a href="?rank__gt={{ request.GET.rank__gt }}&rank__lt={{ request.GET.rank__lt }}&first_name={{ request.GET.first_name }}&page={{ players.previous_page_number }}" class="btn btn-light font-weight-bold mr-2">&laquo; Назад</a>
             {% endif %}
 
             {% if players.has_next %}
-                <a href="?page={{ players.next_page_number }}" class="btn btn-light font-weight-bold">Вперед &raquo;</a>
+                <a href="?rank__gt={{ request.GET.rank__gt }}&rank__lt={{ request.GET.rank__lt }}&first_name={{ request.GET.first_name }}&page={{ players.next_page_number }}" class="btn btn-light font-weight-bold">Вперед &raquo;</a>
             {% endif %}
 
             {% if players.has_next or players.has_previous %}

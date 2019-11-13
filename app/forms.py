@@ -71,3 +71,4 @@ class PlayerChangeForm(UserChangeForm):
 
 class MessageForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea, required=True)
+
