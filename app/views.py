@@ -5,6 +5,7 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count, Q
 from django.core.mail import send_mail
+from django.core.paginator import Paginator
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
@@ -20,8 +21,12 @@ class IndexView(View):
 
 class PlayersView(View):
     def get(self, request):
+        players = Player.objects.filter(is_active=1).annotate(courts_count=Count('courts')).order_by('-pk');
+        paginator = Paginator(players, 4)
+        page = request.GET.get('page')
+        players = paginator.get_page(page)
         return render(request, 'players.html', {
-            'players': Player.objects.filter(is_active=1).annotate(courts_count=Count('courts')).order_by('-pk'),
+            'players': players,
         })
 
 class CourtsView(View):
