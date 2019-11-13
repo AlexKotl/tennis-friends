@@ -22,7 +22,7 @@ class IndexView(View):
 class PlayersView(View):
     def get(self, request):
         players = Player.objects.filter(is_active=1).annotate(courts_count=Count('courts')).order_by('-pk');
-        paginator = Paginator(players, 4)
+        paginator = Paginator(players, 24)
         page = request.GET.get('page')
         players = paginator.get_page(page)
         return render(request, 'players.html', {

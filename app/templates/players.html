@@ -36,19 +36,21 @@
         {% endfor %}
     </div>
 
-    <div class="pagination">
+    <div class="pagination mt-4">
         <span class="step-links">
             {% if players.has_previous %}
-                <a href="?page={{ players.previous_page_number }}" class="btn btn-primary btn-sm">&laquo; Назад</a>
+                <a href="?page={{ players.previous_page_number }}" class="btn btn-light font-weight-bold mr-2">&laquo; Назад</a>
             {% endif %}
 
             {% if players.has_next %}
-                <a href="?page={{ players.next_page_number }}" class="btn btn-primary btn-sm">Вперед &raquo;</a>
+                <a href="?page={{ players.next_page_number }}" class="btn btn-light font-weight-bold">Вперед &raquo;</a>
             {% endif %}
 
-            <small class="current">
-                Страница {{ players.number }} of {{ players.paginator.num_pages }}
+            {% if players.has_next or players.has_previous %}
+            <small class="current ml-3">
+                Страница {{ players.number }} из {{ players.paginator.num_pages }}
             </small>
+            {% endif %}
         </span>
     </div>
 
