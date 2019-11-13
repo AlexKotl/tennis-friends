@@ -62,11 +62,11 @@
     <div class="pagination mt-4">
         <span class="step-links">
             {% if players.has_previous %}
-                <a href="?page={{ players.previous_page_number }}" class="btn btn-light font-weight-bold mr-2">&laquo; Назад</a>
+                <a href="?rank__gt={{ request.GET.rank__gt }}&rank__lt={{ request.GET.rank__lt }}&first_name={{ request.GET.first_name }}&page={{ players.previous_page_number }}" class="btn btn-light font-weight-bold mr-2">&laquo; Назад</a>
             {% endif %}
 
             {% if players.has_next %}
-                <a href="?page={{ players.next_page_number }}" class="btn btn-light font-weight-bold">Вперед &raquo;</a>
+                <a href="?rank__gt={{ request.GET.rank__gt }}&rank__lt={{ request.GET.rank__lt }}&first_name={{ request.GET.first_name }}&page={{ players.next_page_number }}" class="btn btn-light font-weight-bold">Вперед &raquo;</a>
             {% endif %}
 
             {% if players.has_next or players.has_previous %}

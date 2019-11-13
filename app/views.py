@@ -25,7 +25,7 @@ class PlayersView(View):
 
         filter = PlayerFilter(request.GET, queryset=players)
         players = filter.qs
-        paginator = Paginator(players, 4)
+        paginator = Paginator(players, 36)
         page = request.GET.get('page')
 
         try:
