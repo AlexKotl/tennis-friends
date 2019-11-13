@@ -94,11 +94,23 @@ class Player(AbstractUser):
         return data['profile_picture']
 
 class PlayerFilter(django_filters.FilterSet):
-    first_name = django_filters.CharFilter(lookup_expr='iexact')
+    ranks = [(x/10, x/10) for x in range(10, 75, 5)];
+    rank__gt = django_filters.ChoiceFilter(
+        choices=ranks,
+        empty_label="От",
+        field_name='rank',
+        lookup_expr='gte')
+    rank__lt = django_filters.ChoiceFilter(
+        choices=ranks,
+        empty_label="До",
+        field_name='rank',
+        lookup_expr='lte')
+
+    first_name = django_filters.CharFilter(lookup_expr='icontains')
 
     class Meta:
         model = Player
-        fields = ['first_name']
+        fields = []
 
 class Message(models.Model):
     author = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="authors")

@@ -6,17 +6,32 @@
 {% endblock %}
 
 {% block breadcrumbs %}
-    <a href="">Игроки</a>
+    <a href="{% url 'players' %}">Игроки</a>
 {% endblock %}
 
 {% block content %}
     <h1>Игроки</h1>
 
-    <div class="card">
-        <div class="card-body">
-            <form action="" method="get">
-                {{ filter.form.as_p }}
-                <input type="submit" />
+    <div class="card mt-3 mb-3">
+        <div class="card-body players-filters">
+            <form action="" method="get" class="row">
+                <div class="col-sm-4">
+                    Уровень: <br>
+                    {{ filter.form.rank__gt }}
+                    -
+                    {{ filter.form.rank__lt }}
+                </div>
+
+                <div class="col-sm-4">
+                    Поиск по имени: <br>
+                    {{ filter.form.first_name }}
+                </div>
+
+                <div class="col-sm-4">
+                    <button type="submit" class="btn btn-primary pull-right">
+                        <i class="fa fa-search"></i> Поиск
+                    </button>
+                </div>
             </form>
         </div>
     </div>
