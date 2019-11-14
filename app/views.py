@@ -52,6 +52,7 @@ class PlayerView(View):
     def get(self, request, id):
         player = Player.objects.get(pk=id)
         messages = None
+        show_phone = False
         if request.user.is_authenticated:
             user = Player.objects.get(pk=request.user.id)
             messages = Message.objects.filter(author__in=[user, player], recipient__in=[user, player]).order_by("-pk")
@@ -65,10 +66,16 @@ class PlayerView(View):
             except Message.DoesNotExist:
                 pass
 
+            # if user is a friend - show phone no
+            replies_count = Message.objects.filter(author=player).count()
+            if replies_count > 0:
+                show_phone = True
+
         return render(request, 'player.html', {
             'player': player,
             'messages': messages,
-            'message_form': MessageForm
+            'message_form': MessageForm,
+            'show_phone': show_phone,
         })
 
 class MessageView(LoginRequiredMixin, View):

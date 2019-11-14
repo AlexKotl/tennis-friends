@@ -29,7 +29,11 @@
                     Уровень: <b>{{ player.rank }}</b><br>
                     {% if player.player_since > 0 %}
                         <i class="fa fa-calendar"></i>
-                        Игровой опыт: <b>с {{ player.player_since }}</b> года
+                        Игровой опыт: <b>с {{ player.player_since }}</b> года <br>
+                    {% endif %}
+                    {% if show_phone and player.phone %}
+                        <i class="fa fa-phone"></i>
+                        Телефон: <b>{{ player.phone }}</b> <br>
                     {% endif %}
                 </div>
             </div>
