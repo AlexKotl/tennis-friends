@@ -3,7 +3,12 @@
 {% load bootstrap4 %}
 
 {% block site_title %}
-    Регистрация профиля теннисиста
+
+    {% if request.path == '/register/' %}
+        Регистрация профиля теннисиста
+    {% else %}
+        Профиль
+    {% endif %}
 {% endblock %}
 
 {% block breadcrumbs %}
