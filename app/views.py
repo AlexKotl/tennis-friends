@@ -42,7 +42,7 @@ class PlayersView(View):
 class CourtsView(View):
     def get(self, request):
         return render(request, 'courts.html', {
-            'courts': Court.objects.filter(flag=1).annotate(players_count=Count('player')).order_by('-pk'),
+            'courts': Court.objects.filter(flag=1).annotate(players_count=Count('player')).order_by('-players_count'),
         })
 
 class LoginView(generic.CreateView):

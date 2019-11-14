@@ -1,11 +1,12 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model
+from django.db.models import Count, Q
 from datetime import datetime
 from .models import Player, Court
 
 courts_input = forms.ModelMultipleChoiceField(
-    queryset=Court.objects.all(),
+    queryset=Court.objects.filter(flag=1).annotate(players_count=Count('player')).order_by('-players_count'),
     widget=forms.CheckboxSelectMultiple,
     required=False,
     label="Корты",
