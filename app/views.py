@@ -67,7 +67,7 @@ class PlayerView(View):
                 pass
 
             # if user is a friend - show phone no
-            replies_count = Message.objects.filter(author=player).count()
+            replies_count = Message.objects.filter(author=player, recipient=user).count()
             if replies_count > 0:
                 show_phone = True
 
