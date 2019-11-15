@@ -24,7 +24,10 @@
                     <div class="background-image circle" style="background-image: url('{% if player.image != '' %}/media/{{ player.image }}{% else %}{% static 'images/blank-player2.jpg' %}{% endif %}')"></div>
                 </div>
                 <div class="col-md-9">
-                    <h1>{{ player.first_name }}</h1>
+                    <h1>
+                        {{ player.first_name }}
+                        <small class="ml-2">({{ player.nickname }})</small>
+                    </h1>
                     <i class="fa fa-trophy"></i>
                     Уровень: <b>{{ player.rank }}</b><br>
                     {% if player.player_since > 0 %}

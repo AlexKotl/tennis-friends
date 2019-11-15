@@ -36,11 +36,17 @@ class Player(AbstractUser):
     player_since = models.IntegerField(default=0)
     about = models.TextField(default="",blank=True)
 
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.email})"
+
+    def get_nickname(self):
+        return self.email.split("@")[0]
+
+    nickname = property(get_nickname)
 
     def save(self, *args, **kwargs):
         if self.image:

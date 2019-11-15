@@ -11,6 +11,11 @@ i.fa {
     margin-right: 3px; // add small margin to all icons
 }
 
+h1 small {
+    color: #666;
+    font-size: 14px;
+}
+
 .main-container {
     max-width: $content_max_width;
     margin: auto;
