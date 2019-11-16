@@ -103,12 +103,12 @@ class PlayerFilter(django_filters.FilterSet):
     ranks = [(x/10, x/10) for x in range(10, 75, 5)];
     rank__gt = django_filters.ChoiceFilter(
         choices=ranks,
-        empty_label="От",
+        empty_label="Мин. уровень",
         field_name='rank',
         lookup_expr='gte')
     rank__lt = django_filters.ChoiceFilter(
         choices=ranks,
-        empty_label="До",
+        empty_label="Макс. уровень",
         field_name='rank',
         lookup_expr='lte')
 
