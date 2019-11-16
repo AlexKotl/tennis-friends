@@ -36,6 +36,7 @@ ALLOWED_HOSTS = ['web', 'localhost']
 INSTALLED_APPS = [
     'bootstrap4',
     'app',
+    'widget_tweaks',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

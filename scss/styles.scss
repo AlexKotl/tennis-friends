@@ -159,17 +159,19 @@ h1 small {
 }
 
 .players-filters {
-    line-height: 34px;
-    select {
-        height: 34px;
-        margin: 2px 0;
-    }
-    input[type=text] {
-        height: 34px;
-        margin: 2px 0;
-    }
     .rank select {
-        width: 60px;
+        width: 48%;
+    }
+    input {
+        width: 100%;
+    }
+    button {
+        width: 100%;
+        padding: 8px 10px
+    }
+    selec, button, input {
+        margin-top: 2px;
+        margin-bottom: 2px;
     }
 }
 
