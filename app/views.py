@@ -1,3 +1,4 @@
+from datetime import date
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.views import View, generic
@@ -151,3 +152,11 @@ class ProfileView(LoginRequiredMixin, SuccessMessageMixin, generic.UpdateView):
 
     def get_object(self, queryset=None):
         return Player.objects.get(pk=self.request.user.id)
+
+class SitemapView(View):
+    def get(self, request):
+        return render(request, 'sitemap.xml', {
+            'courts': Court.objects.filter(flag=1),
+            'players': Player.objects.filter(is_active=1),
+            'date': date.today().strftime("%Y-%m-%d")
+        })
