@@ -1,11 +1,45 @@
+{% with domain="playtennis.com.ua" %}
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>http://{{ settings.SITE_URL }}/</loc>
+        <loc>http://{{ domain }}/</loc>
         <lastmod>{{ date }}</lastmod>
         <changefreq>daily</changefreq>
-        <priority>0.8</priority>
+        <priority>1</priority>
     </url>
 
+    <url>
+        <loc>http://{{ domain }}{% url 'courts' %}</loc>
+        <lastmod>{{ date }}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1</priority>
+    </url>
+
+    <url>
+        <loc>http://{{ domain }}{% url 'players' %}</loc>
+        <lastmod>{{ date }}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1</priority>
+    </url>
+
+    {% for court in courts %}
+        <url>
+            <loc>http://{{ domain }}{% url 'court' court.id %}</loc>
+            <lastmod>{{ date }}</lastmod>
+            <changefreq>weekly</changefreq>
+            <priority>0.8</priority>
+        </url>
+    {% endfor %}
+
+    {% for player in players %}
+        <url>
+            <loc>http://{{ domain }}{% url 'player' player.id %}</loc>
+            <lastmod>{{ date }}</lastmod>
+            <changefreq>weekly</changefreq>
+            <priority>0.5</priority>
+        </url>
+    {% endfor %}
+
 </urlset>
+{% endwith %}
