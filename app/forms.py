@@ -74,12 +74,12 @@ class MessageForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea, required=True)
 
 class RequestCreationForm(forms.ModelForm):
-    description = forms.CharField(widget=forms.Textarea, required=True)
+    details = forms.CharField(widget=forms.Textarea, required=True)
     courts = courts_input
 
     class Meta:
         model = Request
-        fields = ('description', 'is_court_reserved', 'courts', 'date',)
+        fields = ('details', 'is_court_reserved', 'courts', 'date',)
 
     def set_user(self, user):
         self.user = user

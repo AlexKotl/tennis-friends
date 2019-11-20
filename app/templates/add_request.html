@@ -82,7 +82,7 @@
             <label class="col-md-3 col-form-label">Прочие детали</label>
             <div class="col-md-9">
                 {{ form.about.errors }}
-                <textarea name="description" cols="10" rows="4" class="form-control" placeholder="Детали игры">{% if form.description.value != None %}{{ form.description.value }}{% endif %}</textarea>
+                <textarea name="details" cols="10" rows="4" class="form-control" placeholder="Детали игры">{% if form.details.value != None %}{{ form.details.value }}{% endif %}</textarea>
                 <small class="form-text text-muted">
                     Укажите детали игры, такие как:
                     <ul>

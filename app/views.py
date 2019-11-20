@@ -8,6 +8,7 @@ from django.db.models import Count, Q
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from .models import Player, Court, Message, PlayerFilter
@@ -163,7 +164,6 @@ class SitemapView(View):
 
 class RequestsAddView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
     form_class = RequestCreationForm
-    #model = Request
     template_name = 'add_request.html'
     success_url = reverse_lazy('index')
     success_message = "Ваш запрос успешно добавлен."
@@ -172,4 +172,5 @@ class RequestsAddView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateVie
         self.object = form.save()
         self.object.user = Player.objects.get(pk=self.request.user.id)
         self.object.save()
+        messages.success(self.request, self.success_message) # force add message, mixin will not work in overrided method
         return HttpResponseRedirect(self.get_success_url())
