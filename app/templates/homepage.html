@@ -12,6 +12,14 @@
         }
     </style>
 
+    {% if messages %}
+        <div class="alert alert-success">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+        </div>
+    {% endif %}
+
     <div class="row home-page">
         <div class="col-md-7">
             <h2>Поиска партнеров по теннису</h2>
@@ -58,6 +66,12 @@
             {% endif %}
         </div>
         <div class="col-md-5">
+            <h3>Запросы на игру</h3>
+            <a href="{% url 'add_request' %}" class="btn btn-primary btn-sm">
+                <i class="fa fa-plus"></i>
+                Запрос на игру
+            </a>
+
             <div class="card">
                 <div class="card-body">
                     <div class="top-players row">

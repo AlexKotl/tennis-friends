@@ -75,7 +75,8 @@ class MessageForm(forms.Form):
 
 class RequestCreationForm(forms.ModelForm):
     description = forms.CharField(widget=forms.Textarea, required=True)
+    courts = courts_input
 
     class Meta:
         model = Request
-        fields = ('description',)
+        fields = ('description', 'is_court_reserved', 'courts', 'date')

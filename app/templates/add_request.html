@@ -1,0 +1,92 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block site_title %}
+    Запрос на игру
+{% endblock %}
+
+{% block breadcrumbs %}
+    <a href="">Добавить запрос на игру</a>
+{% endblock %}
+
+{% block content %}
+    <h1>Запрос на игру</h1>
+    Используя форму ниже, вы можете добавить запрос на игру, который увидят все игроки на главной странице. Укажите желаемую дату игры, забронирован ли у вас корт и прочие детали.
+
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <form method="post" class="mt-5">
+        {% csrf_token %}
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="id_is_looking">Дата игры</label>
+            <div class="col-md-9">
+                <input type="text" name="date" value="{% if form.date.value != None %}{{ form.date.value }}{% endif %}" class="form-control" placeholder="ГГГГ/ММ/ДД">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label">Корты</label>
+            <div class="col-md-9">
+                <div class="row" style="padding-left:15px; padding-top: 15px">
+                    {{ form.courts.errors }}
+                    {% for court in form.fields.courts.queryset %}
+                        <div class="form-check col-12 col-sm-4">
+                            <label class="form-check-label">
+                                <input class="form-check-input" name="courts" type="checkbox" value="{{ court.id }}" {% if court.id in form.courts.value %} checked {% endif %} />
+                                {{ court.name }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+                <small><a>Отобразить все корты</a></small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="id_is_looking">&nbsp;</label>
+            <div class="col-md-9">
+                <div class="form-check">
+                    <input type="checkbox" name="is_court_reserved" class="form-check-input" id="id_is_court_reserved" {% if form.is_court_reserved.value == 1 %} checked {% endif %}>
+                    <label class="form-check-label" for="id_is_court_reserved">Корт уже забронирован</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label">Прочие детали</label>
+            <div class="col-md-9">
+                {{ form.about.errors }}
+                <textarea name="description" cols="10" rows="4" class="form-control" placeholder="Детали игры">{% if form.description.value != None %}{{ form.description.value }}{% endif %}</textarea>
+                <small class="form-text text-muted">
+                    Укажите детали игры, такие как:
+                    <ul>
+                        <li>предполагаемое время игры</li>
+                        <li>желаемый уровень партнера</li>
+                        <li>условия оплаты корта</li>
+                    </ul>
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="id_is_looking">&nbsp;</label>
+            <div class="col-md-9">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-plus"></i>
+                    Отправить запрос на игру
+                </button>
+            </div>
+        </div>
+
+    </form>
+{% endblock %}

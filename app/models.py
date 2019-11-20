@@ -130,9 +130,10 @@ class Message(models.Model):
         return f"{self.text} (from: {self.author.first_name} -> {self.recipient.first_name})"
 
 class Request(models.Model):
-    date = models.DateField(auto_now=True)
+    date = models.DateField()
     user = models.ForeignKey(Player, on_delete=models.CASCADE)
     courts = models.ManyToManyField(Court, blank=True)
+    is_court_reserved = models.BooleanField(default=False)
     details = models.TextField()
     flag = models.IntegerField(default=1)
 
