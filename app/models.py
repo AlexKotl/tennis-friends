@@ -128,3 +128,13 @@ class Message(models.Model):
 
     def __str__(self):
         return f"{self.text} (from: {self.author.first_name} -> {self.recipient.first_name})"
+
+class Request(models.Model):
+    date = models.DateField(auto_now=True)
+    user = models.ForeignKey(Player, on_delete=models.CASCADE)
+    courts = models.ManyToManyField(Court, blank=True)
+    details = models.TextField()
+    flag = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f"REQUEST:{self.id}"
