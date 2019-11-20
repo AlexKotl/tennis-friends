@@ -16,3 +16,4 @@ class CourtAdmin(admin.ModelAdmin):
 admin.site.register(Player)
 admin.site.register(Court, CourtAdmin)
 admin.site.register(Message)
+admin.site.register(Request)
