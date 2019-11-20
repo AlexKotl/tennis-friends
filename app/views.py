@@ -167,3 +167,9 @@ class RequestsAddView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateVie
     template_name = 'add_request.html'
     success_url = reverse_lazy('index')
     success_message = "Ваш запрос успешно добавлен."
+
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.user = Player.objects.get(pk=self.request.user.id)
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())

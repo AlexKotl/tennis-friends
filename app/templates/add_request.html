@@ -21,7 +21,8 @@
     <script>
         $(document).ready(function() {
             $('.datepicker').datepicker({
-                language: 'ru'
+                language: 'ru',
+                format: 'yyyy-mm-dd',
             });
         })
     </script>
@@ -33,7 +34,7 @@
         {% for field in form %}
             {% for error in field.errors %}
                 <div class="alert alert-danger">
-                    <strong>{{ error|escape }}</strong>
+                    {{ field.name }}: <strong>{{ error|escape }}</strong>
                 </div>
             {% endfor %}
         {% endfor %}

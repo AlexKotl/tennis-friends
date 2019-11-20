@@ -79,4 +79,7 @@ class RequestCreationForm(forms.ModelForm):
 
     class Meta:
         model = Request
-        fields = ('description', 'is_court_reserved', 'courts', 'date')
+        fields = ('description', 'is_court_reserved', 'courts', 'date',)
+
+    def set_user(self, user):
+        self.user = user
