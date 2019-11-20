@@ -131,7 +131,7 @@ class Message(models.Model):
 
 class Request(models.Model):
     date = models.DateField()
-    user = models.ForeignKey(Player, on_delete=models.CASCADE)
+    user = models.ForeignKey(Player, on_delete=models.CASCADE, null=True, blank=True)
     courts = models.ManyToManyField(Court, blank=True)
     is_court_reserved = models.BooleanField(default=False)
     details = models.TextField()
