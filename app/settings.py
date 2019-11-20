@@ -26,7 +26,7 @@ SITE_EMAIL = "no-reply@playtennis.com.ua"
 SECRET_KEY = '_k3kpd5gy1oaueh!@vpc9$@#-_vvtx=@5vfgi96h2_&0$p)079'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ['DEBUG_MODE'] 
 
 ALLOWED_HOSTS = ['web', 'localhost']
 
