@@ -11,7 +11,7 @@ from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from .models import Player, Court, Message, PlayerFilter
-from .forms import PlayerCreationForm, PlayerChangeForm, MessageForm
+from .forms import PlayerCreationForm, PlayerChangeForm, MessageForm, RequestCreationForm
 
 class IndexView(View):
     def get(self, request):
@@ -160,3 +160,10 @@ class SitemapView(View):
             'players': Player.objects.filter(is_active=1),
             'date': date.today().strftime("%Y-%m-%d")
         })
+
+class RequestsAddView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
+    form_class = RequestCreationForm
+    #model = Request
+    template_name = 'add_request.html'
+    success_url = reverse_lazy('index')
+    success_message = "Ваш запрос успешно добавлен."
