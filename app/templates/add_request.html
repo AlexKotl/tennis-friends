@@ -10,7 +10,22 @@
     <a href="">Добавить запрос на игру</a>
 {% endblock %}
 
+{% block scripts %}
+    <script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap-datepicker.ru.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">
+{% endblock %}
+
 {% block content %}
+
+    <script>
+        $(document).ready(function() {
+            $('.datepicker').datepicker({
+                language: 'ru'
+            });
+        })
+    </script>
+
     <h1>Запрос на игру</h1>
     Используя форму ниже, вы можете добавить запрос на игру, который увидят все игроки на главной странице. Укажите желаемую дату игры, забронирован ли у вас корт и прочие детали.
 
@@ -24,13 +39,13 @@
         {% endfor %}
     {% endif %}
 
-    <form method="post" class="mt-5">
+    <form method="post" class="mt-5" >
         {% csrf_token %}
 
         <div class="form-group row">
             <label class="col-md-3 col-form-label" for="id_is_looking">Дата игры</label>
             <div class="col-md-9">
-                <input type="text" name="date" value="{% if form.date.value != None %}{{ form.date.value }}{% endif %}" class="form-control" placeholder="ГГГГ/ММ/ДД">
+                <input type="text" name="date" class="datepicker form-control" value="{% if form.date.value != None %}{{ form.date.value }}{% endif %}" placeholder="ГГГГ/ММ/ДД" autocomplete="no">
             </div>
         </div>
 
