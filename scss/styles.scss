@@ -158,6 +158,16 @@ h1 small {
     }
 }
 
+.requests-list {
+    .request {
+        border-top: 1px solid #ddd;
+
+        .header {
+            font-size: 14px; 
+        }
+    }
+}
+
 .players-filters {
     .rank select {
         width: 48%;

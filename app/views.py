@@ -17,7 +17,7 @@ from .forms import PlayerCreationForm, PlayerChangeForm, MessageForm, RequestCre
 class IndexView(View):
     def get(self, request):
         return render(request, 'homepage.html', {
-            'requests': Request.objects.filter(flag=1, date__gte=date.today().strftime("%Y-%m-%d")).order_by('date'),
+            'requests': Request.objects.filter(flag=1, date__gte=date.today().strftime("%Y-%m-%d"), user__isnull=False).order_by('date'),
             'players': Player.objects.filter(is_active=1).annotate(courts_count=Count('courts')).order_by('-pk')[:6],
         })
 

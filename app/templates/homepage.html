@@ -71,29 +71,48 @@
                     <h3>Запросы на игру</h3>
                     <div class="requests-list mb-2">
                         {% for req in requests %}
-                            <div class="request clearfix mb-1 mt-1 pb-1 pt-1" style="border-top: 1px solid #ddd">
-                                <div class="header">
-                                    <b>{{ req.date | date:"d/m" }}</b>: {{ req.user.first_name }}
-                                    {% if req.user.rank > 0 %}
-                                        (уровень {{req.user.rank}})
+                            <div class="request clearfix mb-1 mt-1 pb-1 pt-1 row">
+                                <div class="col-3">
+                                    <a href="{% url 'player' req.user.id %}">
+                                        <div class="background-image circle square" style="background-image: url('{% if req.user.image != '' %}/media/{{ req.user.image }}{% else %}{% static 'images/blank-player2.jpg' %}{% endif %}')"></div>
+                                    </a>
+                                </div>
+                                <div class="col-9">
+                                    <div class="header mb-2">
+                                        <a href="{% url 'player' req.user.id %}" class="btn btn-primary btn-sm pull-right">
+                                            <i class="fa fa-comment-o"></i> Связаться
+                                        </a>
+                                        <b>{{ req.date | date:"d/m" }}</b>: {{ req.user.first_name }}
+                                        {% if req.user.rank > 0 %}
+                                            <small class="ml-2"> <i class="fa fa-trophy"></i> {{req.user.rank}} </small>
+                                        {% endif %}
+                                    </div>
+                                    <div class="details">
+                                        {{ req.details }}
+                                    </div>
+                                    {% if req.courts.count > 0 %}
+                                    <div class="courts font-weight-bold">
+                                        <i class="fa fa-map-marker"></i>
+                                        {% for court in req.courts.all %}
+                                            {{ court.name }}{% if req.courts.count > 1 %},{% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+
+                                    {% if req.user.id == request.user.id %}
+                                        <a href="{% url 'delete_request' req.id %}" onclick="return confirm('Удалить ваш запрос?')" class="text-danger">
+                                            <i class="fa fa-remove"></i> Удалить запрос
+                                        </a>
                                     {% endif %}
                                 </div>
-                                <div class="details">
-                                    {{ req.details }}
-                                </div>
 
-                                {% if false and req.user.id == request.user.id %}
-                                    <a href="{% url 'delete_request' req.id %}" onclick="return confirm('Удалить ваш запрос?')" style="color:darkred">
-                                        <i class="fa fa-remove"></i> Удалить запрос
-                                    </a>
-                                {% endif %}
 
                             </div>
                         {% endfor %}
                     </div>
 
                     <div class="text-center">
-                        <a href="{% url 'add_request' %}" class="btn btn-primary">
+                        <a href="{% url 'add_request' %}" class="btn btn-success">
                             <i class="fa fa-plus"></i>
                             Добавить запрос на игру
                         </a>
