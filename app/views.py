@@ -11,13 +11,13 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-from .models import Player, Court, Message, PlayerFilter
+from .models import Player, Court, Message, PlayerFilter, Request
 from .forms import PlayerCreationForm, PlayerChangeForm, MessageForm, RequestCreationForm
 
 class IndexView(View):
     def get(self, request):
         return render(request, 'homepage.html', {
-            # 'courts': Court.objects.filter(flag=1).annotate(players_count=Count('player')).order_by('-pk')[:6],
+            'requests': Request.objects.filter(flag=1, date__gte=date.today().strftime("%Y-%m-%d")).order_by('date'),
             'players': Player.objects.filter(is_active=1).annotate(courts_count=Count('courts')).order_by('-pk')[:6],
         })
 
