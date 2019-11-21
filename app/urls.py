@@ -16,6 +16,8 @@ urlpatterns = [
     path('register/', views.RegisterView.as_view(), name='register'),
     path('profile/', views.ProfileView.as_view(), name='profile'),
     path('requests/add', views.RequestsAddView.as_view(), name='add_request'),
+    path('requests/<id>/edit', views.RequestsEditView.as_view(), name='edit_request'),
+    path('requests/<id>/delete', views.RequestsDeleteView.as_view(), name='delete_request'),
     path('sitemap.xml', views.SitemapView.as_view(), name='sitemap'),
     path('admin/', admin.site.urls),
 ]

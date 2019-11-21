@@ -66,21 +66,41 @@
             {% endif %}
         </div>
         <div class="col-md-5">
-            <h3>Запросы на игру</h3>
-            <div class="requests-list mb-2">
-                {% for request in requests %}
-                    <div class="request">
-                        {{ request.user.first_name }}
-                        {{ request.date }}
-                        {{ request.details }}
-                    </div>
-                {% endfor %}
-            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3>Запросы на игру</h3>
+                    <div class="requests-list mb-2">
+                        {% for req in requests %}
+                            <div class="request clearfix mb-1 mt-1 pb-1 pt-1" style="border-top: 1px solid #ddd">
+                                <div class="header">
+                                    <b>{{ req.date | date:"d/m" }}</b>: {{ req.user.first_name }}
+                                    {% if req.user.rank > 0 %}
+                                        (уровень {{req.user.rank}})
+                                    {% endif %}
+                                </div>
+                                <div class="details">
+                                    {{ req.details }}
+                                </div>
 
-            <a href="{% url 'add_request' %}" class="btn btn-primary btn-sm mb-4">
-                <i class="fa fa-plus"></i>
-                Запрос на игру
-            </a>
+                                {% if false and req.user.id == request.user.id %}
+                                    <a href="{% url 'delete_request' req.id %}" onclick="return confirm('Удалить ваш запрос?')" style="color:darkred">
+                                        <i class="fa fa-remove"></i> Удалить запрос
+                                    </a>
+                                {% endif %}
+
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="text-center">
+                        <a href="{% url 'add_request' %}" class="btn btn-primary">
+                            <i class="fa fa-plus"></i>
+                            Добавить запрос на игру
+                        </a>
+                    </div>
+
+                </div>
+            </div>
 
             <div class="card">
                 <div class="card-body">

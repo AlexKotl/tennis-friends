@@ -174,3 +174,22 @@ class RequestsAddView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateVie
         self.object.save()
         messages.success(self.request, self.success_message) # force add message, mixin will not work in overrided method
         return HttpResponseRedirect(self.get_success_url())
+
+class RequestsEditView(LoginRequiredMixin, SuccessMessageMixin, generic.UpdateView):
+    model = Request
+    form_class = RequestCreationForm
+    template_name = 'add_request.html'
+    success_url = reverse_lazy('index')
+    success_message = "Ваш запрос отредактирован."
+
+class RequestsEditView(LoginRequiredMixin, SuccessMessageMixin, generic.DeleteView):
+    model = Request
+    form_class = RequestCreationForm
+    template_name = 'add_request.html'
+    success_url = reverse_lazy('index')
+    success_message = "Ваш запрос отредактирован."
+
+class RequestsDeleteView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        messages.success(self.request, "Ваш запрос удален.")
+        return HttpResponseRedirect(reverse_lazy('index'))
