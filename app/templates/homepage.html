@@ -70,6 +70,10 @@
                 <div class="card-body">
                     <h3>Запросы на игру</h3>
                     <div class="requests-list mb-2">
+                        {% if requests.count == 0 %}
+                            Если вы ищете партнера на определенную дату или у вас уже забронирован корт - добавьте запрос чтоб вас нашли другие игроки.
+                        {% endif %}
+
                         {% for req in requests %}
                             <div class="request clearfix mb-1 mt-1 pb-1 pt-1 row">
                                 <div class="col-3 text-center">
@@ -83,9 +87,7 @@
                                 </div>
                                 <div class="col-9">
                                     <div class="header mb-2">
-                                        <a href="{% url 'player' req.user.id %}" class="btn btn-primary btn-sm pull-right">
-                                            <i class="fa fa-comment-o"></i> Связаться
-                                        </a>
+
 
                                         <b><i class="fa fa-calendar"></i> {{ req.date | date:"d/m" }}</b>
 
@@ -105,6 +107,10 @@
                                     {% if req.user.id == request.user.id %}
                                         <a href="{% url 'delete_request' req.id %}" onclick="return confirm('Удалить ваш запрос?')" class="text-danger">
                                             <i class="fa fa-remove"></i> Удалить запрос
+                                        </a>
+                                    {% else %}
+                                        <a href="{% url 'player' req.user.id %}">
+                                            <i class="fa fa-comment-o"></i> Связаться
                                         </a>
                                     {% endif %}
                                 </div>
