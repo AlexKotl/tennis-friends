@@ -182,14 +182,13 @@ class RequestsEditView(LoginRequiredMixin, SuccessMessageMixin, generic.UpdateVi
     success_url = reverse_lazy('index')
     success_message = "Ваш запрос отредактирован."
 
-class RequestsEditView(LoginRequiredMixin, SuccessMessageMixin, generic.DeleteView):
-    model = Request
-    form_class = RequestCreationForm
-    template_name = 'add_request.html'
-    success_url = reverse_lazy('index')
-    success_message = "Ваш запрос отредактирован."
-
 class RequestsDeleteView(LoginRequiredMixin, View):
     def get(self, request, id):
-        messages.success(self.request, "Ваш запрос удален.")
+        req = Request.objects.get(pk=id)
+        if req.user.id != request.user.id:
+            messages.success(self.request, "Недостаточно прав для удаления запроса.")
+        else:
+            req.flag = 2
+            req.save()
+            messages.success(self.request, "Ваш запрос удален.")
         return HttpResponseRedirect(reverse_lazy('index'))
