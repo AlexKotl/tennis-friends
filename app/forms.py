@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model
 from django.db.models import Count, Q
 from datetime import datetime
-from .models import Player, Court
+from .models import Player, Court, Request
 
 courts_input = forms.ModelMultipleChoiceField(
     queryset=Court.objects.filter(flag=1).annotate(players_count=Count('player')).order_by('-players_count'),
@@ -73,3 +73,13 @@ class PlayerChangeForm(UserChangeForm):
 class MessageForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea, required=True)
 
+class RequestCreationForm(forms.ModelForm):
+    details = forms.CharField(widget=forms.Textarea, required=True)
+    courts = courts_input
+
+    class Meta:
+        model = Request
+        fields = ('details', 'is_court_reserved', 'courts', 'date',)
+
+    def set_user(self, user):
+        self.user = user

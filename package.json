@@ -18,6 +18,7 @@
   "homepage": "https://github.com/AlexKotl/tennis-friends#readme",
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "bootstrap-datepicker": "^1.9.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
     "jquery-mask-plugin": "^1.14.16",

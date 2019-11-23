@@ -8,15 +8,16 @@ from django.db.models import Count, Q
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-from .models import Player, Court, Message, PlayerFilter
-from .forms import PlayerCreationForm, PlayerChangeForm, MessageForm
+from .models import Player, Court, Message, PlayerFilter, Request
+from .forms import PlayerCreationForm, PlayerChangeForm, MessageForm, RequestCreationForm
 
 class IndexView(View):
     def get(self, request):
         return render(request, 'homepage.html', {
-            # 'courts': Court.objects.filter(flag=1).annotate(players_count=Count('player')).order_by('-pk')[:6],
+            'requests': Request.objects.filter(flag=1, date__gte=date.today().strftime("%Y-%m-%d"), user__isnull=False).order_by('date'),
             'players': Player.objects.filter(is_active=1).annotate(courts_count=Count('courts')).order_by('-pk')[:6],
         })
 
@@ -160,3 +161,34 @@ class SitemapView(View):
             'players': Player.objects.filter(is_active=1),
             'date': date.today().strftime("%Y-%m-%d")
         })
+
+class RequestsAddView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
+    form_class = RequestCreationForm
+    template_name = 'add_request.html'
+    success_url = reverse_lazy('index')
+    success_message = "Ваш запрос успешно добавлен."
+
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.user = Player.objects.get(pk=self.request.user.id)
+        self.object.save()
+        messages.success(self.request, self.success_message) # force add message, mixin will not work in overrided method
+        return HttpResponseRedirect(self.get_success_url())
+
+class RequestsEditView(LoginRequiredMixin, SuccessMessageMixin, generic.UpdateView):
+    model = Request
+    form_class = RequestCreationForm
+    template_name = 'add_request.html'
+    success_url = reverse_lazy('index')
+    success_message = "Ваш запрос отредактирован."
+
+class RequestsDeleteView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        req = Request.objects.get(pk=id)
+        if req.user.id != request.user.id:
+            messages.success(self.request, "Недостаточно прав для удаления запроса.")
+        else:
+            req.flag = 2
+            req.save()
+            messages.success(self.request, "Ваш запрос удален.")
+        return HttpResponseRedirect(reverse_lazy('index'))
