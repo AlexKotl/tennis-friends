@@ -72,20 +72,23 @@
                     <div class="requests-list mb-2">
                         {% for req in requests %}
                             <div class="request clearfix mb-1 mt-1 pb-1 pt-1 row">
-                                <div class="col-3">
+                                <div class="col-3 text-center">
                                     <a href="{% url 'player' req.user.id %}">
                                         <div class="background-image circle square" style="background-image: url('{% if req.user.image != '' %}/media/{{ req.user.image }}{% else %}{% static 'images/blank-player2.jpg' %}{% endif %}')"></div>
                                     </a>
+                                    <b>{{ req.user.first_name }}</b> <br>
+                                    {% if req.user.rank > 0 %}
+                                        <i class="fa fa-trophy"></i> {{req.user.rank}}
+                                    {% endif %}
                                 </div>
                                 <div class="col-9">
                                     <div class="header mb-2">
                                         <a href="{% url 'player' req.user.id %}" class="btn btn-primary btn-sm pull-right">
                                             <i class="fa fa-comment-o"></i> Связаться
                                         </a>
-                                        <b>{{ req.date | date:"d/m" }}</b>: {{ req.user.first_name }}
-                                        {% if req.user.rank > 0 %}
-                                            <small class="ml-2"> <i class="fa fa-trophy"></i> {{req.user.rank}} </small>
-                                        {% endif %}
+
+                                        <b><i class="fa fa-calendar"></i> {{ req.date | date:"d/m" }}</b>
+
                                     </div>
                                     <div class="details">
                                         {{ req.details }}
