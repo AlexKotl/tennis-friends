@@ -106,7 +106,7 @@ class CourtView(View):
         court = Court.objects.annotate(players_count=Count('player')).get(pk=id)
         return render(request, 'court.html', {
             'court': court,
-            'players': Player.objects.filter(courts=court),
+            'players': Player.objects.filter(courts=court).order_by('-image', '-pk'),
         })
 
 class FriendsView(LoginRequiredMixin, View):
